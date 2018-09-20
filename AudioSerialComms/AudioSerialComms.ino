@@ -26,10 +26,11 @@ void loop () {
   //TODO only execute during startup
     //initialize some variables
 
-  //demo();
+  demo();
 }
 
 void demo() {
+  StartEngine();  
   delay(12000);
   EngineUp();
   delay(12000);
@@ -37,14 +38,14 @@ void demo() {
   delay(12000);
   StopEngine();
   delay(12000);
-  StartEngine();
+  //StartEngine();
 }
 
 void StartupPlayer() {
   //wait for valid receiver signal
 
   //start engine
-  StartEngine();
+
 }
 
 
