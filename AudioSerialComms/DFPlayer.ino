@@ -1,14 +1,57 @@
+//commandline Items
 #define Start_Byte 0x7E
 #define Version_Byte 0xFF
 #define Command_Length 0x06
 #define End_Byte 0xEF
 #define Acknowledge 0x00 //Returns info with command 0x41 [0x01: info, 0x00: no info]
 
-//playback mode
+//playback modes
 #define RepeatPlayback 1
 #define FolderRepeatPlayback 2
 #define SingleRepeatPlayback 3
 #define RandomPlayback 4
+
+void wait()
+{
+  int busy = 0;
+  while (true) {
+     int bsy = digitalRead(busyPin);
+     if (busy == 1 && bsy == 1) break;
+     if (bsy == 0) busy = 1;
+  }
+}
+
+void ResetPlayer() {
+  ExecuteCommand(0x0C, 0, 0, true);
+}
+
+void SleepPlayer() {
+  ExecuteCommand(0x0A, 0, 0, false);
+  delay(100);
+}
+
+void PlayFolderTrack(byte folderNumber, byte trackNumber)
+{
+  RepeatPlaybackOff();
+  ExecuteCommand(0x0F, folderNumber, trackNumber, false);
+}
+
+void RepeatPlaybackFolder(byte folderNumber) {
+  ExecuteCommand(0x17, 0, folderNumber, false);
+}
+
+void RepeatPlaybackOn() {
+  ExecuteCommand(0x11, 0, 1, true);
+}
+
+void RepeatPlaybackOff() {
+  ExecuteCommand(0x11, 0, 0, true);  
+}
+
+void setVolume(int volume)
+{
+  ExecuteCommand(0x06, 0, volume, true); // Set the volume (0x00~0x30)
+}
 
 // Excecute the command with parameters
 void ExecuteCommand(byte CMD, byte Par1, byte Par2, bool wait)
@@ -26,6 +69,6 @@ void ExecuteCommand(byte CMD, byte Par1, byte Par2, bool wait)
   }
   //wait when we want to
   if (wait) {
-    delay(1000);
+    delay(25);
   }
 }

@@ -1,32 +1,64 @@
+bool engineIsRunningHigh = false;
+bool engineIsRunning = false;
+
+#define EngineVersion 2
+
+#define EngineStartFolder 1
+#define EngineLowFolder 2
+#define EngineUpFolder 3
+#define EngineHighFolder 4
+#define EngineDownFolder 5
+#define EngineStopFolder 6
+
 void StartEngine() {
+  engineIsRunningHigh = false;
+  engineIsRunning = true;
+  
   //Play startup
+  PlayFolderTrack(EngineStartFolder, EngineVersion);
 
   //Wait till ready / delay Xms
+  wait();
 
   //Start loop engine low
+  RepeatPlaybackFolder(EngineLowFolder);
 }
 
 void EngineUp() {
   //Play rev up
-
+  PlayFolderTrack(EngineUpFolder, EngineVersion);
   //Wait till ready / delay Xms
-
+  wait();
+  
   //Start loop engine high
+  RepeatPlaybackFolder(EngineHighFolder);
+  engineIsRunningHigh = true;
 }
 
 void EngineDown() {
   //Play rev down
-
+  PlayFolderTrack(EngineDownFolder, EngineVersion);
+  
   //Wait till ready / delay Xms
-
+  wait();
+  
   //Start loop engine low
+  RepeatPlaybackFolder(EngineLowFolder);
+  engineIsRunningHigh = false;
 }
 
 void StopEngine() {
   //check if engine is high
-    //EngineDown();
-    
+  if (engineIsRunningHigh) {
+    EngineDown();
+
+    //Wait till ready / delay Xms
+    engineIsRunningHigh = false;
+  } 
+  engineIsRunning = false;
   //Play engine stop
+  PlayFolderTrack(EngineStopFolder, EngineVersion);
+  wait();
 }
 
 bool PlaySequence(int sequenceLength, int sequence[5]) {

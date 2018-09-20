@@ -1,0 +1,85 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="Excavator-full-range_data" version="1.3.0" audacityversion="2.2.2" sel0="13.7998949903" sel1="22.1417441462" vpos="0" h="0.0000000000" zoom="61.3772786382" rate="44100.0" snapto="off" selectionformat="hh:mm:ss + milliseconds" frequencyformat="Hz" bandwidthformat="octaves">
+	<tags/>
+	<wavetrack name="0004-excavator - full" channel="0" linked="1" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="44100" gain="1.0" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="247265">
+				<waveblock start="0">
+					<simpleblockfile filename="e080837d.au" len="247265" min="-0.933906" max="0.835713" rms="0.133809"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+		<waveclip offset="5.60691610" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="191432">
+				<waveblock start="0">
+					<simpleblockfile filename="e0808106.au" len="191432" min="-1.023784" max="0.974942" rms="0.311107"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+		<waveclip offset="9.94777778" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="95716">
+				<waveblock start="0">
+					<simpleblockfile filename="e0808e17.au" len="95716" min="-1.023784" max="0.974942" rms="0.311107"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+		<waveclip offset="12.11820862" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="450660">
+				<waveblock start="0">
+					<simpleblockfile filename="e080853f.au" len="107221" min="-1.041238" max="0.944159" rms="0.166071"/>
+				</waveblock>
+				<waveblock start="107221">
+					<simpleblockfile filename="e08085e8.au" len="262144" min="-0.499584" max="0.495704" rms="0.104865"/>
+				</waveblock>
+				<waveblock start="369365">
+					<simpleblockfile filename="e0808588.au" len="81295" min="-0.549515" max="0.678358" rms="0.096802"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="0004-excavator - full" channel="1" linked="0" mute="0" solo="0" height="150" minimized="0" isSelected="1" rate="44100" gain="1.0" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="247265">
+				<waveblock start="0">
+					<simpleblockfile filename="e0808ddb.au" len="247265" min="-0.933906" max="0.835713" rms="0.133809"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+		<waveclip offset="5.60691610" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="191432">
+				<waveblock start="0">
+					<simpleblockfile filename="e0808688.au" len="191432" min="-1.023784" max="0.974942" rms="0.311107"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+		<waveclip offset="9.94777778" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="95716">
+				<waveblock start="0">
+					<simpleblockfile filename="e0808baa.au" len="95716" min="-1.023784" max="0.974942" rms="0.311107"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+		<waveclip offset="12.11820862" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="450660">
+				<waveblock start="0">
+					<simpleblockfile filename="e0808ac1.au" len="107221" min="-1.041238" max="0.944159" rms="0.166071"/>
+				</waveblock>
+				<waveblock start="107221">
+					<simpleblockfile filename="e0808778.au" len="262144" min="-0.499584" max="0.495704" rms="0.104865"/>
+				</waveblock>
+				<waveblock start="369365">
+					<simpleblockfile filename="e080841a.au" len="81295" min="-0.549515" max="0.678358" rms="0.096802"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+</project>
