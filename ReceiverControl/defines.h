@@ -34,7 +34,7 @@
 #define CRUSHER_RC_PIN (7) //nano: digital 7
 #define TRACK_LEFT_RC_PIN (8) //nano: digital 8
 #define TRACK_RIGHT_RC_PIN (9) //nano: digital 9
-#define ON_OFF_PIN (10) //nano: digital 10
+#define ON_OFF_PIN (12) //nano: digital 11
 
 
 //ENGINE
@@ -47,3 +47,6 @@
 #define ENGINE_DOWN_FOLDER 5
 #define ENGINE_STOP_FOLDER 6
 
+#define PLAYER_BUSY_PIN (3)
+#define PLAYER_RX_PIN (10)
+#define PLAYER_TX_PIN (11)

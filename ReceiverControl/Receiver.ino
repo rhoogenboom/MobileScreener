@@ -1,3 +1,7 @@
+void HandleReceiverInput() {
+    
+}
+
 void calcSignal(int channel, int pinNumber) 
 {
     //if the pin has gone HIGH, record the microseconds since the Arduino started up 

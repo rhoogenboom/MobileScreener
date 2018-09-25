@@ -1,15 +1,17 @@
+#include <SoftwareSerial.h>
 #include <ESC.h>
 #include "defines.h"
 #include "variables.h"
 
-
 void setup() {
   //initialize boot vars
   Serial.begin(9600);
+  Serial.println(F("Setting up"));
 
   //initiale RC channel values to 0
   for (int i=0; i++; i<RC_CHANNEL_COUNT) {
     timer_start[i] = 0; 
+    channel_pulse_time[i] = 1500;
   }
 
   //initialize pins
@@ -27,20 +29,24 @@ void setup() {
   BeltESC.arm();
   HopperESC.arm();
   CrusherESC.arm();
-
+  Serial.println(F("Setup done"));
 }
 
 void loop() {
   if (startup) {
+    Serial.println(F("Starting"));
     BeltESC.speed(BELT_ESC_STOP);
     HopperESC.speed(HOPPER_ESC_STOP);
     CrusherESC.speed(CRUSHER_ESC_STOP);
 
     //start crusher engine
+    StartEngine();
     
+    Serial.println(F("Started"));
     startup = false;
   }
 
-  
-
+  HandleReceiverInput();
+  PrintChannelValues();
+  delay(1000);
 }

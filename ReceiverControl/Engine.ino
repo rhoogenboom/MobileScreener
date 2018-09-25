@@ -3,35 +3,35 @@ void StartEngine() {
   engineIsRunning = true;
   
   //Play startup
-  PlayFolderTrack(EngineStartFolder, EngineVersion);
+  PlayFolderTrack(ENGINE_START_FOLDER, ENGINE_VERSION);
 
   //Wait till ready / delay Xms
   wait();
 
   //Start loop engine low
-  RepeatPlaybackFolder(EngineLowFolder);
+  RepeatPlaybackFolder(ENGINE_LOW_FOLDER);
 }
 
 void EngineUp() {
   //Play rev up
-  PlayFolderTrack(EngineUpFolder, EngineVersion);
+  PlayFolderTrack(ENGINE_UP_FOLDER, ENGINE_VERSION);
   //Wait till ready / delay Xms
   wait();
   
   //Start loop engine high
-  RepeatPlaybackFolder(EngineHighFolder);
+  RepeatPlaybackFolder(ENGINE_HIGH_FOLDER);
   engineIsRunningHigh = true;
 }
 
 void EngineDown() {
   //Play rev down
-  PlayFolderTrack(EngineDownFolder, EngineVersion);
+  PlayFolderTrack(ENGINE_DOWN_FOLDER, ENGINE_VERSION);
   
   //Wait till ready / delay Xms
   wait();
   
   //Start loop engine low
-  RepeatPlaybackFolder(EngineLowFolder);
+  RepeatPlaybackFolder(ENGINE_LOW_FOLDER);
   engineIsRunningHigh = false;
 }
 
@@ -45,7 +45,7 @@ void StopEngine() {
   } 
   engineIsRunning = false;
   //Play engine stop
-  PlayFolderTrack(EngineStopFolder, EngineVersion);
+  PlayFolderTrack(ENGINE_STOP_FOLDER, ENGINE_VERSION);
   wait();
 }
 
