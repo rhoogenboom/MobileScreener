@@ -1,6 +1,6 @@
 #define HOPPER_ESC_PIN (2) //nano: digital 2 
-#define HOPPER_ESC_LOW (1000)
-#define HOPPER_ESC_HIGH (2000)
+#define HOPPER_ESC_MIN (1000)
+#define HOPPER_ESC_MAX (2000)
 #define HOPPER_ESC_ARM (1500)
 #define HOPPER_ESC_REVERSE (false)
 #define HOPPER_ESC_STOP (1500)
@@ -9,8 +9,8 @@
 #define HOPPER_ESC_HIGH (500)
 
 #define BELT_ESC_PIN (3) //nano: digital 3
-#define BELT_ESC_LOW (1000)
-#define BELT_ESC_HIGH (2000)
+#define BELT_ESC_MIN (1000)
+#define BELT_ESC_MAX (2000)
 #define BELT_ESC_ARM (1500)
 #define BELT_ESC_REVERSE (false)
 #define BELT_ESC_STOP (1500)
@@ -19,8 +19,8 @@
 #define BELT_ESC_HIGH (500)
 
 #define CRUSHER_ESC_PIN (4) //nano: digital 4
-#define CRUSHER_ESC_LOW (1000)
-#define CRUSHER_ESC_HIGH (2000)
+#define CRUSHER_ESC_MIN (1000)
+#define CRUSHER_ESC_MAX (2000)
 #define CRUSHER_ESC_ARM (500) //brushless, probably a low arm value
 #define CRUSHER_ESC_REVERSE (false)
 #define CRUSHER_ESC_STOP (1500)
@@ -36,6 +36,7 @@
 #define TRACK_RIGHT_RC_PIN (9) //nano: digital 9
 #define ON_OFF_PIN (12) //nano: digital 11
 
+#define ON_OFF_CHANNEL (5)
 
 //ENGINE
 #define ENGINE_VERSION 2

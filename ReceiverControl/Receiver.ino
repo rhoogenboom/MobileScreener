@@ -1,4 +1,28 @@
 void HandleReceiverInput() {
+  HandleOnOffChannel();
+  HandleDriving();
+  HandleBelt();
+  HandleHopper();
+  HandleCrusher();  
+}
+
+void HandleOnOffChannel() {
+  int channelValue =  channel_pulse_time[ON_OFF_CHANNEL]; 
+}
+  
+void HandleDriving() {
+  
+}
+
+void HandleBelt() {
+  
+}
+
+void HandleHopper() {
+  
+}
+
+void HandleCrusher() {
     
 }
 
@@ -28,6 +52,6 @@ void calculateHopperReceiverInput() { calcSignal(1, HOPPER_RC_PIN); }
 void calculateCrusherReceiverInput() { calcSignal(2, CRUSHER_RC_PIN); }
 void calculateTrackLeftReceiverInput() { calcSignal(3, TRACK_LEFT_RC_PIN); }
 void calculateTrackRightReceiverInput() { calcSignal(4, TRACK_RIGHT_RC_PIN); }
-void calculateOnOffReceiverInput() { calcSignal(5, TRACK_RIGHT_RC_PIN); }
+void calculateOnOffReceiverInput() { calcSignal(ON_OFF_CHANNEL, ON_OFF_PIN); }
 
 

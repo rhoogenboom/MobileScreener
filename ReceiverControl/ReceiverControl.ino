@@ -9,7 +9,7 @@ void setup() {
   Serial.println(F("Setting up"));
 
   //initiale RC channel values to 0
-  for (int i=0; i++; i<RC_CHANNEL_COUNT) {
+  for (int i=0; i<RC_CHANNEL_COUNT; i++ ) {
     timer_start[i] = 0; 
     channel_pulse_time[i] = 1500;
   }
@@ -48,5 +48,4 @@ void loop() {
 
   HandleReceiverInput();
   PrintChannelValues();
-  delay(1000);
 }
