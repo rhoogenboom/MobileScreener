@@ -1,12 +1,12 @@
 void HandleReceiverInput() {
-  for (int channel=0;channel <=5;channel++) {
-    channel_pulse_time[channel] = pulseIn(channelPins[channel], HIGH, RECEIVER_CHANNEL_TIMEOUT); 
-  }
-//  HandleOnOffChannel();
-//  HandleDriving();
-//  HandleBelt();
-//  HandleHopper();
-//  HandleCrusher();
+//  for (int channel=0;channel <=5;channel++) {
+//    channel_pulse_time[channel] = pulseIn(channelPins[channel], HIGH, RECEIVER_CHANNEL_TIMEOUT); 
+//  }
+  HandleOnOffChannel();
+  HandleDriving();
+  HandleBelt();
+  HandleHopper();
+  HandleCrusher();
 }
 
 void HandleCrusher(){
