@@ -1,9 +1,12 @@
 void HandleReceiverInput() {
-  HandleOnOffChannel();
-  HandleDriving();
-  HandleBelt();
-  HandleHopper();
-  HandleCrusher();
+  for (int channel=0;channel <=5;channel++) {
+    channel_pulse_time[channel] = pulseIn(channelPins[channel], HIGH, RECEIVER_CHANNEL_TIMEOUT); 
+  }
+//  HandleOnOffChannel();
+//  HandleDriving();
+//  HandleBelt();
+//  HandleHopper();
+//  HandleCrusher();
 }
 
 void HandleCrusher(){
@@ -123,43 +126,30 @@ void calcSignal(int channel, int pinNumber)
   {
     timer_start[channel] = micros();
   }
-  //otherwise, the pin has gone LOW
   else
   {
-    //only worry about this if the timer has actually started
-    if (timer_start[channel] != 0)
-    {
-      //record the pulse time
-      channel_pulse_time[channel] = ((volatile int)micros() - timer_start[channel]);
-      //restart the timer
-      timer_start[channel] = 0;
-    }
+    //record the pulse time
+    channel_pulse_time[channel] = ((volatile int)micros() - timer_start[channel]);
   }
 }
 
 void calculateBeltReceiverInput() {
   calcSignal(0, BELT_RC_PIN);
-  Serial.println("XX");
 }
 void calculateHopperReceiverInput() {
   calcSignal(1, HOPPER_RC_PIN);
-  Serial.println("XX");
 }
 void calculateCrusherReceiverInput() {
   calcSignal(CRUSHER_CHANNEL, CRUSHER_RC_PIN);
-  Serial.println("XX");
 }
 void calculateTrackLeftReceiverInput() {
   calcSignal(3, TRACK_LEFT_RC_PIN);
-  Serial.println("XX");
 }
 void calculateTrackRightReceiverInput() {
   calcSignal(4, TRACK_RIGHT_RC_PIN);
-  Serial.println("XX");
 }
 void calculateOnOffReceiverInput() {
   calcSignal(ON_OFF_CHANNEL, ON_OFF_PIN);
-  Serial.println("XX");
 }
 
 

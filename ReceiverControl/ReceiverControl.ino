@@ -16,20 +16,20 @@ void setup() {
   }
 
   //initialize pins
-  pinMode(HOPPER_RC_PIN, INPUT);
-  pinMode(BELT_RC_PIN, INPUT);
-  pinMode(CRUSHER_RC_PIN, INPUT);
-  pinMode(TRACK_LEFT_RC_PIN, INPUT);   
-  pinMode(TRACK_RIGHT_RC_PIN, INPUT);   
-  pinMode(ON_OFF_PIN, INPUT);   
+  pinMode(HOPPER_RC_PIN, INPUT_PULLUP);
+  pinMode(BELT_RC_PIN, INPUT_PULLUP);
+  pinMode(CRUSHER_RC_PIN, INPUT_PULLUP);
+  pinMode(TRACK_LEFT_RC_PIN, INPUT_PULLUP);   
+  pinMode(TRACK_RIGHT_RC_PIN, INPUT_PULLUP);   
+  pinMode(ON_OFF_PIN, INPUT_PULLUP);   
 
-  //connect receiver and int handlers
-  attachInterrupt(HOPPER_RC_PIN, calculateHopperReceiverInput, CHANGE);
-  attachInterrupt(BELT_RC_PIN, calculateBeltReceiverInput, CHANGE);
-  attachInterrupt(CRUSHER_RC_PIN, calculateCrusherReceiverInput, CHANGE);
-  attachInterrupt(TRACK_LEFT_RC_PIN, calculateTrackLeftReceiverInput, CHANGE);
-  attachInterrupt(TRACK_RIGHT_RC_PIN, calculateTrackRightReceiverInput, CHANGE);
-  attachInterrupt(ON_OFF_PIN, calculateOnOffReceiverInput, CHANGE);
+//  //connect receiver and int handlers
+//  attachInterrupt(HOPPER_RC_PIN, calculateHopperReceiverInput, CHANGE);
+//  attachInterrupt(BELT_RC_PIN, calculateBeltReceiverInput, CHANGE);
+//  attachInterrupt(CRUSHER_RC_PIN, calculateCrusherReceiverInput, CHANGE);
+//  attachInterrupt(TRACK_LEFT_RC_PIN, calculateTrackLeftReceiverInput, CHANGE);
+//  attachInterrupt(TRACK_RIGHT_RC_PIN, calculateTrackRightReceiverInput, CHANGE);
+//  attachInterrupt(ON_OFF_PIN, calculateOnOffReceiverInput, CHANGE);
 
   //connect ESCs
   BeltESC.arm();

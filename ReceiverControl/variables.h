@@ -6,6 +6,7 @@ volatile unsigned long timer_start[RC_CHANNEL_COUNT]; //start times for signal f
 volatile int channel_pulse_time[RC_CHANNEL_COUNT]; //keep track of the receiver values
 int button_pressed_time[RC_CHANNEL_COUNT]; //keep track of how long the button was pressed
 int button_pressed_value[RC_CHANNEL_COUNT]; //keep track of the button value
+int channelPins[RC_CHANNEL_COUNT] = {5,6,7,8,9,12};
 
 int CrusherCommand = 0;
 int CrusherPulse = 0;
