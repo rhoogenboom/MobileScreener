@@ -3,7 +3,7 @@ void PrintChannelValues() {
   for (int i=0; i<RC_CHANNEL_COUNT; ++i) {
     PrintChannel(i);
   }
-  delay(50);
+  delay(1000);
 }
 
 void PrintChannel(int channel) {

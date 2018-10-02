@@ -126,10 +126,16 @@ void calcSignal(int channel, int pinNumber)
   {
     timer_start[channel] = micros();
   }
+  //otherwise, the pin has gone LOW 
   else
   {
-    //record the pulse time
-    channel_pulse_time[channel] = ((volatile int)micros() - timer_start[channel]);
+        //only worry about this if the timer has actually started
+        if(timer_start[channel] != 0)
+        { 
+          //record the pulse time
+          channel_pulse_time[channel] = ((volatile int)micros() - timer_start[channel]);
+          timer_start[channel] = 0;
+        }
   }
 }
 
