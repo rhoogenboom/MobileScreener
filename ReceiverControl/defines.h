@@ -1,16 +1,26 @@
 //PINS
-#define HOPPER_ESC_PIN (4) //nano: digital 2 
-#define BELT_ESC_PIN (5) //nano: digital 3
-#define CRUSHER_ESC_PIN (6) //nano: digital 4
-#define HOPPER_RC_PIN (2) //nano: digital 5
-#define BELT_RC_PIN (3) //nano: digital 6
-#define CRUSHER_RC_PIN (18) //nano: digital 7
-#define TRACK_LEFT_RC_PIN (19) //nano: digital 8
-#define TRACK_RIGHT_RC_PIN (20) //nano: digital 9
-#define ON_OFF_PIN (21) //nano: digital 12
+#define CRUSHER_RC_PIN (2) 
+#define TRACK_LEFT_RC_PIN (3) 
+#define TRACK_RIGHT_RC_PIN (18)  
+#define HOPPER_RC_PIN (19) 
+#define BELT_RC_PIN (20)  
+#define ON_OFF_RC_PIN (21) //nano: digital 12
+
+#define CRUSHER_ESC_PIN (4)  
+#define HOPPER_ESC_PIN (5) 
+#define BELT_ESC_PIN (6)  
+
 #define PLAYER_BUSY_PIN (9) //notify when player is done playing and available, requires interrupt?? switch with on/off pin?
 #define PLAYER_RX_PIN (10) //TX to player
 #define PLAYER_TX_PIN (11) //RX from player
+
+//ARRAY NUMERING
+#define CRUSHER_CHANNEL_NR (0) 
+#define TRACK_LEFT_CHANNEL_NR (1) 
+#define TRACK_RIGHT_CHANNEL_NR (2) 
+#define HOPPER_CHANNEL_NR (3) 
+#define BELT_CHANNEL_NR (4) 
+#define ON_OFF_CHANNEL_NR (5) //array item number with value for on/off switch
 
 
 #define HOPPER_ESC_MIN (1000) //minimal valid value for ESC
@@ -31,10 +41,9 @@
 #define BELT_ESC_MED (300)
 #define BELT_ESC_HIGH (500)
 
-#define CRUSHER_CHANNEL (2) //array item number with value for on/off switch
 #define CRUSHER_ESC_MIN (1000)
 #define CRUSHER_ESC_MAX (2000)
-#define CRUSHER_ESC_ARM (500) //brushless, probably a low arm value
+#define CRUSHER_ESC_ARM (1500) //brushless, probably a low arm value
 #define CRUSHER_ESC_REVERSE (false)
 #define CRUSHER_ESC_STOP (1500)
 #define CRUSHER_ESC_LOW (150)
@@ -42,9 +51,9 @@
 #define CRUSHER_ESC_HIGH (500)
 
 #define RC_CHANNEL_COUNT (6) //number of receiver channels hooked up to arduino
-#define RC_CHANNEL_DEADBAND (5) //fluctuations around the channel center smaller than this we ignore
+#define RC_CHANNEL_DEADBAND (10) //fluctuations around the channel center smaller than this we ignore
+#define RC_CHANNEL_MIDDLE (5) //fluctuations around the channel center smaller than this we ignore
 
-#define ON_OFF_CHANNEL (5) //array item number with value for on/off switch
 #define ON_OFF_MIN (1000)
 #define ON_OFF_MAX (2000)
 #define CHANNEL_MIDDLE (1500)

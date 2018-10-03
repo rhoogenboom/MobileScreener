@@ -1,4 +1,4 @@
-#include <SoftwareSerial.h>
+//#include <SoftwareSerial.h>
 #include <ESC.h>
 #include "defines.h"
 #include "variables.h"
@@ -29,18 +29,21 @@ void setup() {
   pinMode(CRUSHER_RC_PIN, INPUT);
   pinMode(TRACK_LEFT_RC_PIN, INPUT);   
   pinMode(TRACK_RIGHT_RC_PIN, INPUT);   
-  pinMode(ON_OFF_PIN, INPUT);   
+  pinMode(ON_OFF_RC_PIN, INPUT);   
   attachInterrupt(digitalPinToInterrupt(HOPPER_RC_PIN), calculateHopperReceiverInput, CHANGE);
   attachInterrupt(digitalPinToInterrupt(BELT_RC_PIN), calculateBeltReceiverInput, CHANGE);
   attachInterrupt(digitalPinToInterrupt(CRUSHER_RC_PIN), calculateCrusherReceiverInput, CHANGE);
   attachInterrupt(digitalPinToInterrupt(TRACK_LEFT_RC_PIN), calculateTrackLeftReceiverInput, CHANGE);
   attachInterrupt(digitalPinToInterrupt(TRACK_RIGHT_RC_PIN), calculateTrackRightReceiverInput, CHANGE);
-  attachInterrupt(digitalPinToInterrupt(ON_OFF_PIN), calculateOnOffReceiverInput, CHANGE);
+  attachInterrupt(digitalPinToInterrupt(ON_OFF_RC_PIN), calculateOnOffReceiverInput, CHANGE);
 
+  delay(2500);
+  
   //connect ESCs
   BeltESC.arm();
   HopperESC.arm();
   CrusherESC.arm();
+  delay(2500);
   Serial.println(F("Setup done"));
 }
 
@@ -59,5 +62,6 @@ void loop() {
   }
 
   HandleReceiverInput();
-  PrintChannelValues();
+  PrintDebugOutput();
+  //delay(2000);
 }

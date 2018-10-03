@@ -1,7 +1,4 @@
 void HandleReceiverInput() {
-//  for (int channel=0;channel <=5;channel++) {
-//    channel_pulse_time[channel] = pulseIn(channelPins[channel], HIGH, RECEIVER_CHANNEL_TIMEOUT); 
-//  }
   HandleOnOffChannel();
   HandleDriving();
   HandleBelt();
@@ -10,96 +7,96 @@ void HandleReceiverInput() {
 }
 
 void HandleCrusher(){
-  CrusherPulse =  channel_pulse_time[CRUSHER_CHANNEL];
+  crusherPulse =  channel_pulse_time[CRUSHER_CHANNEL_NR];
 
-  if (CrusherPulse == 0) {
+  if (crusherPulse == 0) {
     //no receiver input or lost receiver input, maintain current values
   }
   else {
-    //check if the pulse is considered a valid press
-    if ((CrusherPulse >= ON_OFF_MIDDLE + RC_CHANNEL_DEADBAND) ||
-        (CrusherPulse <= ON_OFF_MIDDLE - RC_CHANNEL_DEADBAND)) {
-      //button is pressed enough left or right
-      if (CrusherButtonDown > 0) {
-        //if we had pressed before, check if we have pressed long enough to make a switch
-        if ((CrusherButtonDown + BUTTON_PRESSED_SHORT >= millis()) && 
-               CrusherCommand != CRUSHER_SWITCH_ON &&
-                CrusherCommand != CRUSHER_SWITCH_OFF) {
-                  //we pressed long enough and we have not started switching yet
-          switch (CrusherCommand) {
-            case CRUSHER_IS_OFF:
-              CrusherCommand = CRUSHER_SWITCH_ON;
-              break;
-            case CRUSHER_IS_ON:
-              CrusherCommand = CRUSHER_SWITCH_OFF;
-              break;
-          }
-        }
-      } else {
-        //started pressing the button so take timing and state
-        CrusherButtonDown = millis();
-      }
-    } else {
-      // not pressing (anymore) 
-      CrusherButtonDown = 0; //reset counter on button pressed
-
-      //take action if we pressed long enough
-      switch (CrusherCommand) {
-        case CRUSHER_SWITCH_ON:
-          CrusherCommand = CRUSHER_IS_ON;
-          StartEngine();
-          break;
-        case CRUSHER_SWITCH_OFF:
-          CrusherCommand = CRUSHER_IS_OFF;
-          StopEngine();
-          break;
-      }
-    }
+//    //check if the pulse is considered a valid press
+//    if (ChannelIsOffCenter(crusherPulse)) {
+//      //button is pressed enough left or right
+//      if (crusherButtonDown > 0) {
+//        //if we had pressed before, check if we have pressed long enough to make a switch
+//        if ((crusherButtonDown + BUTTON_PRESSED_SHORT >= millis()) && 
+//               crusherCommand != CRUSHER_SWITCH_ON &&
+//                crusherCommand != CRUSHER_SWITCH_OFF) {
+//                  //we pressed long enough and we have not started switching yet
+//          switch (CrusherCommand) {
+//            case CRUSHER_IS_OFF:
+//              crusherCommand = CRUSHER_SWITCH_ON;
+//              break;
+//            case CRUSHER_IS_ON:
+//              crusherCommand = CRUSHER_SWITCH_OFF;
+//              break;
+//          }
+//        }
+//      } else {
+//        //started pressing the button so take timing and state
+//        crusherButtonDown = millis();
+//      }
+//    } else {
+//      // not pressing (anymore) 
+//      crusherButtonDown = 0; //reset counter on button pressed
+//
+//      //take action if we pressed long enough
+//      switch (crusherCommand) {
+//        case CRUSHER_SWITCH_ON:
+//          crusherCommand = CRUSHER_IS_ON;
+//          StartEngine();
+//          break;
+//        case CRUSHER_SWITCH_OFF:
+//          crusherCommand = CRUSHER_IS_OFF;
+//          StopEngine();
+//          break;
+//      }
+//    }
+    //set the output ESC channel
+    CrusherESC.speed(crusherPulse);
   }
 }
 
 void HandleOnOffChannel() {
-  OnOffPulse =  channel_pulse_time[ON_OFF_CHANNEL];
+  onOffPulse =  channel_pulse_time[ON_OFF_CHANNEL_NR];
 
-  if (OnOffPulse == 0) {
+  if (onOffPulse == 0) {
     //no receiver input or lost receiver input, maintain current values
   }
   else {
     //check if the pulse is considered a valid press
-    if ((OnOffPulse >= ON_OFF_MIDDLE + RC_CHANNEL_DEADBAND) ||
-        (OnOffPulse <= ON_OFF_MIDDLE - RC_CHANNEL_DEADBAND)) {
+    if (ChannelIsOffCenter(onOffPulse)) {
       //button is pressed enough left or right
-      if (OnOffButtonDown > 0) {
+      if (onOffButtonDown > 0) {
         //if we had pressed before, check if we have pressed long enough to make a switch
-        if ((OnOffButtonDown + BUTTON_PRESSED_SHORT >= millis()) && 
-               OnOffCommand != POWER_SWITCH_ON &&
-                OnOffCommand != POWER_SWITCH_OFF) {
+        if ((onOffButtonDown + BUTTON_PRESSED_SHORT >= millis()) && 
+               onOffCommand != POWER_SWITCH_ON &&
+                onOffCommand != POWER_SWITCH_OFF) {
                   //we pressed long enough and we have not started switching yet
-          switch (OnOffCommand) {
+          switch (onOffCommand) {
             case POWER_IS_OFF:
-              OnOffCommand = POWER_SWITCH_ON;
+              onOffCommand = POWER_SWITCH_ON;
               break;
             case POWER_IS_ON:
-              OnOffCommand = POWER_SWITCH_OFF;
+              onOffCommand = POWER_SWITCH_OFF;
               break;
           }
         }
       } else {
         //started pressing the button so take timing and state
-        OnOffButtonDown = millis();
+        onOffButtonDown = millis();
       }
     } else {
       // not pressing (anymore) 
-      OnOffButtonDown = 0; //reset counter on button pressed
+      onOffButtonDown = 0; //reset counter on button pressed
 
       //take action if we pressed long enough
-      switch (OnOffCommand) {
+      switch (onOffCommand) {
         case POWER_SWITCH_ON:
-          OnOffCommand = POWER_IS_ON;
+          onOffCommand = POWER_IS_ON;
           StartEngine();
           break;
         case POWER_SWITCH_OFF:
-          OnOffCommand = POWER_IS_OFF;
+          onOffCommand = POWER_IS_OFF;
           StopEngine();
           break;
       }
@@ -108,15 +105,49 @@ void HandleOnOffChannel() {
 }
 
 void HandleDriving() {
+  int drivingPulseLeft =  channel_pulse_time[TRACK_LEFT_CHANNEL_NR];
+  int drivingPulseRight =  channel_pulse_time[TRACK_RIGHT_CHANNEL_NR];
 
+  if (drivingPulseLeft == 0 || drivingPulseRight == 0) {
+    //no receiver input or lost receiver input, maintain current values
+  }
+  else {
+    //check if the pulse is considered a valid press
+    if ( ChannelIsOffCenter(drivingPulseLeft) || 
+          ChannelIsOffCenter(drivingPulseRight) ) {
+        //we have signal on the tracks so crusher is moving
+        //TODO: play crusher moving warning signal
+        crusherIsMoving = true;
+      } 
+      else {
+        //TODO: stop playing crusher moving warning signal if we are playing something
+        crusherIsMoving = false;
+      }
+  }
 }
 
 void HandleBelt() {
+  beltPulse =  channel_pulse_time[BELT_CHANNEL_NR];
 
+  if (beltPulse == 0) {
+    //no receiver input or lost receiver input, maintain current values
+  }
+  else {
+
+    BeltESC.speed(beltPulse);
+  }
 }
 
 void HandleHopper() {
+  hopperPulse =  channel_pulse_time[HOPPER_CHANNEL_NR];
 
+  if (hopperPulse == 0) {
+    //no receiver input or lost receiver input, maintain current values
+  }
+  else {
+
+    HopperESC.speed(hopperPulse);
+  }
 }
 
 void calcSignal(int channel, int pinNumber)
@@ -140,22 +171,26 @@ void calcSignal(int channel, int pinNumber)
 }
 
 void calculateBeltReceiverInput() {
-  calcSignal(0, BELT_RC_PIN);
+  calcSignal(BELT_CHANNEL_NR, BELT_RC_PIN);
 }
 void calculateHopperReceiverInput() {
-  calcSignal(1, HOPPER_RC_PIN);
+  calcSignal(HOPPER_CHANNEL_NR, HOPPER_RC_PIN);
 }
 void calculateCrusherReceiverInput() {
-  calcSignal(CRUSHER_CHANNEL, CRUSHER_RC_PIN);
+  calcSignal(CRUSHER_CHANNEL_NR, CRUSHER_RC_PIN);
 }
 void calculateTrackLeftReceiverInput() {
-  calcSignal(3, TRACK_LEFT_RC_PIN);
+  calcSignal(TRACK_LEFT_CHANNEL_NR, TRACK_LEFT_RC_PIN);
 }
 void calculateTrackRightReceiverInput() {
-  calcSignal(4, TRACK_RIGHT_RC_PIN);
+  calcSignal(TRACK_RIGHT_CHANNEL_NR, TRACK_RIGHT_RC_PIN);
 }
 void calculateOnOffReceiverInput() {
-  calcSignal(ON_OFF_CHANNEL, ON_OFF_PIN);
+  calcSignal(ON_OFF_CHANNEL_NR, ON_OFF_RC_PIN);
 }
 
+bool ChannelIsOffCenter(int channelValue) {
+  return ((channelValue >= RC_CHANNEL_MIDDLE + RC_CHANNEL_DEADBAND) ||
+        (channelValue <= RC_CHANNEL_MIDDLE - RC_CHANNEL_DEADBAND));
+}
 
