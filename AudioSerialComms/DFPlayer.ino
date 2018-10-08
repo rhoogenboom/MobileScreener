@@ -11,13 +11,13 @@
 #define SingleRepeatPlayback 3
 #define RandomPlayback 4
 
+void switchBusyState() {
+  playerBusy = false;
+}
+
 void wait()
 {
-  int busy = 0;
-  while (true) {
-     int bsy = digitalRead(busyPin);
-     if (busy == 1 && bsy == 1) break;
-     if (bsy == 0) busy = 1;
+  while (playerBusy) {
   }
 }
 
@@ -32,19 +32,23 @@ void SleepPlayer() {
 
 void PlayFolderTrack(byte folderNumber, byte trackNumber)
 {
+  playerBusy = true;
   RepeatPlaybackOff();
-  ExecuteCommand(0x0F, folderNumber, trackNumber, false);
+  ExecuteCommand(0x0F, folderNumber, trackNumber, true);
 }
 
 void RepeatPlaybackFolder(byte folderNumber) {
-  ExecuteCommand(0x17, 0, folderNumber, false);
+  playerBusy = true;
+  ExecuteCommand(0x17, 0, folderNumber, true);
 }
 
 void RepeatPlaybackOn() {
+  playerBusy = true;
   ExecuteCommand(0x11, 0, 1, true);
 }
 
 void RepeatPlaybackOff() {
+  playerBusy = true;
   ExecuteCommand(0x11, 0, 0, true);  
 }
 
@@ -69,6 +73,6 @@ void ExecuteCommand(byte CMD, byte Par1, byte Par2, bool wait)
   }
   //wait when we want to
   if (wait) {
-    delay(25);
+    delay(100);
   }
 }

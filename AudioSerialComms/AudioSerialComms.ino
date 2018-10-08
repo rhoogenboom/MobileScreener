@@ -1,21 +1,25 @@
 #include "SoftwareSerial.h"
 SoftwareSerial mySerial(10, 11);
+#include <PinChangeInterrupt.h>
 
 int busyPin = 3;
+volatile bool playerBusy = false; 
+bool startUp = true; 
 
 void setup () {
-//  Serial.begin (9600); 
+  Serial.begin (9600); 
 
   //set pin which reads busy signal from player
   pinMode(busyPin, INPUT);
-
+  attachInterrupt(digitalPinToInterrupt(busyPin), switchBusyState, RISING);
+  
   //TODO setup buttons for volume control
 
   //comms object to player
   mySerial.begin (9600);
 
   //initialize player
-  setVolume(20);
+  setVolume(15);
 
   //TODO initialize timers
   
@@ -25,8 +29,14 @@ void setup () {
 void loop () { 
   //TODO only execute during startup
     //initialize some variables
-
-  demo();
+  if (startUp) {
+    startUp = false;
+    //EngineUp();
+    //delay(15000);
+    EngineDown();
+  }
+  
+  //demo();
 }
 
 void demo() {
