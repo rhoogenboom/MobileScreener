@@ -23,6 +23,7 @@ void setup() {
   pinMode(TRACK_LEFT_RC_PIN, INPUT);   
   pinMode(TRACK_RIGHT_RC_PIN, INPUT);   
   pinMode(ON_OFF_RC_PIN, INPUT);   
+
   attachInterrupt(digitalPinToInterrupt(HOPPER_RC_PIN), calculateHopperReceiverInput, CHANGE);
   attachInterrupt(digitalPinToInterrupt(BELT_RC_PIN), calculateBeltReceiverInput, CHANGE);
   attachInterrupt(digitalPinToInterrupt(CRUSHER_RC_PIN), calculateCrusherReceiverInput, CHANGE);
@@ -48,7 +49,7 @@ void loop() {
     CrusherESC.speed(CRUSHER_ESC_STOP);
 
     //start crusher engine
-   // StartEngine();
+    StartEngine();
     
     Serial.println(F("Started"));
     startup = false;
