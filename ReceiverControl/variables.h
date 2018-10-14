@@ -9,9 +9,7 @@ int button_pressed_value[RC_CHANNEL_COUNT]; //keep track of the button value
 int channelPins[RC_CHANNEL_COUNT] = {2,3,18,19,20,21};
 String channelNames[RC_CHANNEL_COUNT] = {"CRUSHER", "TRACK RAIL", "TRACK OTHER", "HOPPER", "BELT", "ON/OFF"};
 
-int crusherCommand = 0;
 int crusherPulse = 0;
-int crusherButtonDown = 0;
 
 int onOffCommand = 0;
 int onOffPulse = 0;
@@ -31,6 +29,7 @@ ESC CrusherESC (CRUSHER_ESC_PIN, CRUSHER_ESC_MIN, CRUSHER_ESC_MAX, CRUSHER_ESC_A
 // AUDIO
 bool engineIsRunningHigh = false;
 bool engineIsRunning = false;
+bool playerBusy = false;
 
-//SoftwareSerial SerialMP3Player(PLAYER_RX_PIN, PLAYER_TX_PIN);
+SoftwareSerial SerialMP3Player(PLAYER_RX_PIN, PLAYER_TX_PIN);
 

@@ -13,10 +13,13 @@
 
 void switchBusyState() {
   playerBusy = false;
+  Serial.println("...");
 }
 
-void wait()
+void wait(unsigned int minimalWaitTime)
 {
+  playerBusy = true;
+  delay(minimalWaitTime);
   while (playerBusy) {
   }
 }

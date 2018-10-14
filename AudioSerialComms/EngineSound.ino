@@ -16,9 +16,10 @@ void StartEngine() {
   
   //Play startup
   PlayFolderTrack(EngineStartFolder, EngineVersion);
-
+  //always wait 1 sec to allow the player to start playing
+ 
   //Wait till ready / delay Xms
-  wait();
+  wait(1500);
 
   //Start loop engine low
   RepeatPlaybackFolder(EngineLowFolder);
@@ -28,7 +29,7 @@ void EngineUp() {
   //Play rev up
   PlayFolderTrack(EngineUpFolder, EngineVersion);
   //Wait till ready / delay Xms
-  wait();
+  wait(1500);
   
   //Start loop engine high
   RepeatPlaybackFolder(EngineHighFolder);
@@ -38,9 +39,9 @@ void EngineUp() {
 void EngineDown() {
   //Play rev down
   PlayFolderTrack(EngineDownFolder, EngineVersion);
-  
+ 
   //Wait till ready / delay Xms
-  wait();
+  wait(2500);
   
   //Start loop engine low
   RepeatPlaybackFolder(EngineLowFolder);
@@ -58,7 +59,7 @@ void StopEngine() {
   engineIsRunning = false;
   //Play engine stop
   PlayFolderTrack(EngineStopFolder, EngineVersion);
-  wait();
+  wait(1500);
 }
 
 bool PlaySequence(int sequenceLength, int sequence[5]) {

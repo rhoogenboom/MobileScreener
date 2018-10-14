@@ -1,4 +1,4 @@
-//#include <SoftwareSerial.h>
+#include <SoftwareSerial.h>
 #include <ESC.h>
 #include "defines.h"
 #include "variables.h"
@@ -16,14 +16,7 @@ void setup() {
   }
 
   //initialize pins
-//  pinMode(HOPPER_RC_PIN, INPUT_PULLUP);
-//  pinMode(BELT_RC_PIN, INPUT_PULLUP);
-//  pinMode(CRUSHER_RC_PIN, INPUT_PULLUP);
-//  pinMode(TRACK_LEFT_RC_PIN, INPUT_PULLUP);   
-//  pinMode(TRACK_RIGHT_RC_PIN, INPUT_PULLUP);   
-//  pinMode(ON_OFF_PIN, INPUT_PULLUP);   
-
-//  //connect receiver and int handlers
+  //connect receiver and int handlers
   pinMode(HOPPER_RC_PIN, INPUT);
   pinMode(BELT_RC_PIN, INPUT);
   pinMode(CRUSHER_RC_PIN, INPUT);
