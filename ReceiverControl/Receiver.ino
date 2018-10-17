@@ -1,5 +1,5 @@
 void HandleReceiverInput() {
-  HandleOnOffChannel();
+//  HandleOnOffChannel();
   HandleDriving();
   HandleBelt();
   HandleHopper();
@@ -18,12 +18,13 @@ void HandleCrusher(){
       // check if engine is running, if not start, update state, wait, throttle up
       if (onOffCommand == POWER_IS_ON && !engineIsRunningHigh) {
         // we have switched on the engine, throttle up
+        Serial.println("We've hit engine up!!!!!" );
         EngineUp();
       }
       
     } else {
       //if running engine and running high, throttle down
-      if (onOffCommand == POWER_IS_ON) {
+      if (onOffCommand == POWER_IS_ON && engineIsRunningHigh) {
         // we have switched on the engine, throttle up
         EngineDown();
       }

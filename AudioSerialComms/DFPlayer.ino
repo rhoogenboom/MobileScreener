@@ -11,7 +11,7 @@
 #define SingleRepeatPlayback 3
 #define RandomPlayback 4
 
-void switchBusyState() {
+void SetPlayerFree() {
   playerBusy = false;
   Serial.println("...");
 }
@@ -53,6 +53,14 @@ void RepeatPlaybackOn() {
 void RepeatPlaybackOff() {
   playerBusy = true;
   ExecuteCommand(0x11, 0, 0, true);  
+}
+
+void StartPlayingIntercut(byte trackNumber) {
+  ExecuteCommand(0x13, 0, trackNumber, true);
+}
+
+void StopPlayingIntercut() {
+  ExecuteCommand(0x15, 0, 0, true);
 }
 
 void setVolume(int volume)

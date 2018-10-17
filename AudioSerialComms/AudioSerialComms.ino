@@ -1,3 +1,4 @@
+#include <ESC.h>
 #include <OSL_SimpleTimer.h>
 #include "SoftwareSerial.h"
 SoftwareSerial mySerial(10, 11);
@@ -6,11 +7,10 @@ SoftwareSerial mySerial(10, 11);
 //variables
 //timer
 OSL_SimpleTimer timer; //timer object for handling events outside the loop code
-unsigned int startEngineTimerID;
-unsigned int engineHighTimerID;
+unsigned int timerID;
 
 //player
-int busyPin = 3;
+int busyPin = 21;
 volatile bool playerBusy = false; 
 
 //logic
@@ -22,7 +22,7 @@ void setup () {
 
   //set pin which reads busy signal from player
   pinMode(busyPin, INPUT);
-  attachInterrupt(digitalPinToInterrupt(busyPin), switchBusyState, RISING);
+  attachInterrupt(digitalPinToInterrupt(busyPin), SetPlayerFree, RISING);
   
   //TODO setup buttons for volume control
 
@@ -41,7 +41,9 @@ void loop () {
   //TODO only execute during startup
     //initialize some variables
   if (startUp) {
-    delay(2000);
+    timerID = timer.setTimeout(12000, StopPlayingWarningBeep);
+    
+    delay(1000);
     startUp = false;
     //init timer
     //EngineUp();
@@ -50,6 +52,9 @@ void loop () {
       //PlayFolderTrack(5, 2);
 
     demo();
+    //StartEngine();
+    //delay(3000);
+    //StartPlayingWarningBeep();
   }
 
   timer.run();

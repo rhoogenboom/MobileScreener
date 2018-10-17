@@ -10,6 +10,16 @@ bool engineIsRunning = false;
 #define EngineDownFolder 5
 #define EngineStopFolder 6
 
+#define WarningBeepTrackNumber 1
+
+void StartPlayingWarningBeep() {
+  StartPlayingIntercut(WarningBeepTrackNumber);  
+}
+
+void StopPlayingWarningBeep() {
+  StopPlayingIntercut();  
+}
+
 void StartEngine() {
   engineIsRunningHigh = false;
   engineIsRunning = true;

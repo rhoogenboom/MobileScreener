@@ -11,9 +11,9 @@
 #define SingleRepeatPlayback 3
 #define RandomPlayback 4
 
-void switchBusyState() {
+void SetPlayerFree() {
   playerBusy = false;
-  Serial.println("...");
+//  Serial.println("...");
 }
 
 void wait(unsigned int minimalWaitTime)
@@ -21,6 +21,7 @@ void wait(unsigned int minimalWaitTime)
   playerBusy = true;
   delay(minimalWaitTime);
   while (playerBusy) {
+    Serial.print(F("Player is busy: ")); PrintTrueFalse(playerBusy);
   }
 }
 
@@ -53,6 +54,14 @@ void RepeatPlaybackOn() {
 void RepeatPlaybackOff() {
   playerBusy = true;
   ExecuteCommand(0x11, 0, 0, true);  
+}
+
+void StartPlayingIntercut(byte trackNumber) {
+  ExecuteCommand(0x13, 0, trackNumber, true);
+}
+
+void StopPlayingIntercut() {
+  ExecuteCommand(0x15, 0, 0, true);
 }
 
 void setVolume(int volume)
