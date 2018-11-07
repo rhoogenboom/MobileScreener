@@ -1,68 +1,72 @@
+#include <QueueArray.h>
 #include <ESC.h>
-#include <OSL_SimpleTimer.h>
+//#include <OSL_SimpleTimer.h>
 #include "SoftwareSerial.h"
-SoftwareSerial mySerial(10, 11);
+SoftwareSerial SerialMP3Player(10, 11);
 #include <PinChangeInterrupt.h>
 
 //variables
 //timer
-OSL_SimpleTimer timer; //timer object for handling events outside the loop code
+//OSL_SimpleTimer timer; //timer object for handling events outside the loop code
 unsigned int timerID;
 
 //player
-int busyPin = 21;
-volatile bool playerBusy = false; 
+int busyPin = 3;
+volatile bool playerBusy = false;
 
 //logic
-bool startUp = true; 
+bool startUp = true;
 
+//
+QueueArray <char> actionQueue;
+QueueArray <int> trackQueue;
 
 void setup () {
-  Serial.begin (9600); 
+  Serial.begin (9600);
 
   //set pin which reads busy signal from player
   pinMode(busyPin, INPUT);
   attachInterrupt(digitalPinToInterrupt(busyPin), SetPlayerFree, RISING);
-  
+
   //TODO setup buttons for volume control
 
   //comms object to player
-  mySerial.begin (9600);
+  SerialMP3Player.begin (9600);
 
   //initialize player
-  setVolume(20);
+  setVolume(5);
 
   //TODO initialize timers
-  
 }
 
 
-void loop () { 
+void loop () {
   //TODO only execute during startup
-    //initialize some variables
+  //initialize some variables
   if (startUp) {
-    timerID = timer.setTimeout(12000, StopPlayingWarningBeep);
-    
+    //timerID = timer.setTimeout(12000, StopPlayingWarningBeep);
+
     delay(1000);
     startUp = false;
     //init timer
     //EngineUp();
     //EngineDown();
-      
-      //PlayFolderTrack(5, 2);
 
-    demo();
-    //StartEngine();
-    //delay(3000);
+    //PlayFolderTrack(5, 2);
+
+    //demo();
+    StartEngine();
+    delay(9000);
+    EngineUp();
     //StartPlayingWarningBeep();
   }
 
-  timer.run();
+  // timer.run();
   //demo();
 }
 
 void demo() {
-  StartEngine();  
+  StartEngine();
   delay(10000);
   EngineUp();
   delay(12000);

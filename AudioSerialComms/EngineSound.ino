@@ -24,25 +24,21 @@ void StartEngine() {
   engineIsRunningHigh = false;
   engineIsRunning = true;
   
-  //Play startup
   PlayFolderTrack(EngineStartFolder, EngineVersion);
-  //always wait 1 sec to allow the player to start playing
- 
-  //Wait till ready / delay Xms
-  wait(1500);
 
-  //Start loop engine low
-  RepeatPlaybackFolder(EngineLowFolder);
+  trackQueue.enqueue(BitShiftCombine(0, EngineLowFolder));
+  actionQueue.enqueue('R');
 }
 
 void EngineUp() {
   //Play rev up
-  PlayFolderTrack(EngineUpFolder, EngineVersion);
-  //Wait till ready / delay Xms
-  wait(1500);
-  
+  trackQueue.enqueue(BitShiftCombine(EngineUpFolder, EngineVersion));
+  actionQueue.enqueue('P');
+
   //Start loop engine high
-  RepeatPlaybackFolder(EngineHighFolder);
+  trackQueue.enqueue(BitShiftCombine(0, EngineHighFolder));
+  actionQueue.enqueue('R');
+ 
   engineIsRunningHigh = true;
 }
 

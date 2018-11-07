@@ -13,7 +13,18 @@
 
 void SetPlayerFree() {
   playerBusy = false;
-  Serial.println("...");
+  // only change from loop to single or from single to loops
+  if (actionQueue.peek() == 'P') {
+    char action = actionQueue.dequeue();
+    int folderAndTrack = trackQueue.dequeue();
+  
+    if (action == 'R') {
+      RepeatPlaybackFolder(BitShiftGetLow(folderAndTrack));
+    }
+    if (action == 'P') {
+      PlayFolderTrack(BitShiftGetHigh(folderAndTrack), BitShiftGetLow(folderAndTrack));
+    }
+  }
 }
 
 void wait(unsigned int minimalWaitTime)
@@ -21,6 +32,7 @@ void wait(unsigned int minimalWaitTime)
   playerBusy = true;
   delay(minimalWaitTime);
   while (playerBusy) {
+    //Serial.print(F("Player is busy: ")); //PrintTrueFalse(playerBusy);
   }
 }
 
@@ -80,7 +92,7 @@ void ExecuteCommand(byte CMD, byte Par1, byte Par2, bool wait)
   //Send the command line to the module
   for (byte k=0; k<10; k++)
   {
-    mySerial.write( Command_line[k]);
+    SerialMP3Player.write( Command_line[k]);
   }
   //wait when we want to
   if (wait) {
