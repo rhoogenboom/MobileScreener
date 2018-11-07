@@ -4,7 +4,7 @@
 #define TRACK_RIGHT_RC_PIN (18)  
 #define HOPPER_RC_PIN (19) 
 #define BELT_RC_PIN (20)  
-#define ON_OFF_RC_PIN (21) //nano: digital 12
+#define ON_OFF_RC_PIN (12) //nano: digital 12
 
 #define CRUSHER_ESC_PIN (4)  
 #define HOPPER_ESC_PIN (5) 
