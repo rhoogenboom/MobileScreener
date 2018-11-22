@@ -8,6 +8,26 @@
 #define MIN(x,y) ( x > y ? y : x )
 #define MAX(x,y) ( x > y ? x : y )
 
+#define MIN_CHANNEL 875 //max left of RC controller
+#define MAX_CHANNEL 2125 //max right of RC controller
+#define CHANNEL_DEADCENTER 10
+
+#define SERVO_MIN_POSITION 1000
+#define SERVO_MAX_POSITION 1500
+#define SERVO_MIDDLE_POSITION 1500
+
+#define MIN_VALUE_MEASURED_FOR_POT 0
+#define MAX_VALUE_MEASURED_FOR_POT 1024
+#define CHANNEL_CENTER 512 //middle of pot meter
+
+//setup pins and lights
+#define SETUP_BUTTON A0 //nano: 20
+#define MAGNET_POT 8 
+#define SERVO_POT 5
+#define MAGNET_LEFT_LED_RED 9
+#define MAGNET_RIGHT_LED_GREEN 10
+
+#define POWER_5V 2
 
 
 
