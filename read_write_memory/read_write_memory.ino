@@ -2,7 +2,6 @@
 #include "variables.h"
 #include <EEPROM.h>
 
-int buttonState = 0;
 
 void setup() {
   Serial.begin(9600);
@@ -10,12 +9,6 @@ void setup() {
   // set button and led pins
   buttonState = 0;
   pinMode(SETUP_BUTTON, INPUT);
-
-  // set one pin to high to provide 5v for the magnet and servo pot meter
-  pinMode(POWER_5V, OUTPUT);
-  digitalWrite(POWER_5V, HIGH);
-
-  // wait?
 
   long Temp;
   // Get EEPROM Initialization value
@@ -41,6 +34,11 @@ void setup() {
   // switch to setup mode (or light mode)
   if (buttonState == HIGH) {
     Serial.println("Setup button pressed, setup mode");
+
+    // set one pin to high to provide 5v for the magnet and servo pot meter
+    pinMode(POWER_5V, OUTPUT);
+    digitalWrite(POWER_5V, HIGH);
+    
     SetupMode();
     ReadPotMeters();
     setupActive = true;

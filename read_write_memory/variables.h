@@ -1,3 +1,5 @@
+int buttonState = 0;
+
 bool setupActive = false;
 
 // EEPROM
