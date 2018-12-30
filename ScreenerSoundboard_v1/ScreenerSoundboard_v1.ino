@@ -36,6 +36,24 @@ void setup() {
 //redefine on off channel to read busy pin of player
   attachInterrupt(digitalPinToInterrupt(PLAYER_BUSY_PIN), SetPlayerFree, RISING);
 
+  //Read previous volume from EEPROM
+  long Temp;
+  // Get EEPROM Initialization value
+  Serial.println("eeprom initial read");
+  eeprom_read(Temp, E_InitNum);
+
+  // If EEPROM has never been initialized before, do so now
+  if (Temp == EEPROM_Init)
+  {
+    Serial.println("eeprom not initialized");
+    Initialize_EEPROM();
+  }
+  else
+  {
+    Serial.println("load eeprom");
+    Load_EEPROM();         
+  }
+
 
   delay(2500);
   

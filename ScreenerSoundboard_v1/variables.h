@@ -1,5 +1,12 @@
-bool startup = true; //indicate if we are still in startup mode for 
+// EEPROM
+const long EEPROM_Init = 0xA01; 
 
+struct __eeprom_data { //  structure that maps all of the data we are storing in EEPROM
+  long E_InitNum;      // Number that indicates if EEPROM values have ever been initialized
+  byte E_volumeLevel;
+};
+
+bool startup = true; //indicate if we are still in startup mode for 
 
 //RECEIVER 
 volatile unsigned long timer_start[RC_CHANNEL_COUNT]; //start times for signal frequency 
@@ -30,6 +37,7 @@ ESC CrusherESC (CRUSHER_ESC_PIN, CRUSHER_ESC_MIN, CRUSHER_ESC_MAX, CRUSHER_ESC_A
 bool engineIsRunningHigh = false;
 bool engineIsRunning = false;
 bool playerBusy = false;
+byte volumeLevel;
 
 SoftwareSerial SerialMP3Player(PLAYER_RX_PIN, PLAYER_TX_PIN);
 
