@@ -2,13 +2,12 @@
 #include "variables.h"
 #include <EEPROM.h>
 
+//onboard led pin
+int ledPin = 13;
 
 void setup() {
-    pinMode(POWER_5V, OUTPUT);
-    digitalWrite(POWER_5V, HIGH);
-
-  
-//  Serial.begin(9600);
+//  
+  Serial.begin(9600);
 //
 //  // initialize the LED pin as an output:
 //  pinMode(ledPin, OUTPUT);
@@ -44,19 +43,53 @@ void setup() {
 //  if (buttonState == HIGH) {
 //    Serial.println("Setup button pressed, setup mode");
 //    
-//    SetupMode();
+    SetupMode();
 //    ReadPotMeters();
 //    setupActive = true;
 //  }
 //  else {
-// //   pinMode(POWER_5V, OUTPUT);
-// //   digitalWrite(POWER_5V, LOW);
 //    Serial.println("Normal mode active");
 //    LightMode();
 //  }
 }
 
 void loop() {
+
+  //set left full
+//  analogWrite(MAGNET_LEFT_LED_RED, 255);
+//  delay(500);
+// 
+//  analogWrite(MAGNET_RIGHT_LED_GREEN, 255);
+//  delay(500);
+//
+//  analogWrite(MAGNET_LEFT_LED_RED, 0);
+//  delay(500);
+//
+//  analogWrite(MAGNET_RIGHT_LED_GREEN, 120);
+//  delay(500);
+
+//  //test gradatie
+//  for (int i=0; i<= 255; i++) {
+//    int k = 255;
+//
+//    analogWrite(MAGNET_LEFT_LED_RED, i);
+//    analogWrite(MAGNET_RIGHT_LED_GREEN, k-i);
+//    delay(10);
+//   
+//  }
+
+//  //test functie
+//  for (int i=0; i<= 1023; i++) {
+//    SetMagnetLEDs(i);
+//    delay(10);
+//  }
+
+//  SetMagnetLEDs(analogRead(MAGNET_POT));
+  delay(500);
+
+  ReadPotMeters();
+  
+
 //  // startup code once
 //
 //

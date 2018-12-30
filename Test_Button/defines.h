@@ -21,13 +21,13 @@
 #define CHANNEL_CENTER 512 //middle of pot meter
 
 //setup pins and lights
-#define SETUP_BUTTON 2 //nano: 20
-#define MAGNET_POT 9 
-#define SERVO_POT 10
-#define MAGNET_LEFT_LED_RED 8
-#define MAGNET_RIGHT_LED_GREEN 5
+#define SETUP_BUTTON A0
+#define MAGNET_POT A5
+#define SERVO_POT A6
+#define MAGNET_LEFT_LED_RED 9
+#define MAGNET_RIGHT_LED_GREEN 10
 
-#define POWER_5V A0
+#define POWER_5V 2
 
 
 
