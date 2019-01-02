@@ -1,5 +1,5 @@
 void HandleReceiverInput() {
-//  HandleOnOffChannel();
+  HandleOnOffChannel();
   HandleDriving();
   HandleBelt();
   HandleHopper();
@@ -35,28 +35,26 @@ void HandleCrusher(){
 }
 
 void HandleOnOffChannel() {
-  onOffPulse =  channel_pulse_time[ON_OFF_CHANNEL_NR];
+  onOffPulse =  pulseIn(ON_OFF_RC_PIN, HIGH);
 
   if (onOffPulse == 0) {
     //no receiver input or lost receiver input, maintain current values
   }
   else {
+    channel_pulse_time[ON_OFF_CHANNEL_NR] = onOffPulse;    
     //check if the pulse is considered a valid press
     if (ChannelIsOffCenter(onOffPulse)) {
       //button is pressed enough left or right
-      if (onOffButtonDown > 0) {
+      if (onOffButtonDown != 0) {
         //if we had pressed before, check if we have pressed long enough to make a switch
-        if ((onOffButtonDown + BUTTON_PRESSED_SHORT >= millis()) && 
-               onOffCommand != POWER_SWITCH_ON &&
-                onOffCommand != POWER_SWITCH_OFF) {
-                  //we pressed long enough and we have not started switching yet
-          switch (onOffCommand) {
-            case POWER_IS_OFF:
-              onOffCommand = POWER_SWITCH_ON;
-              break;
-            case POWER_IS_ON:
-              onOffCommand = POWER_SWITCH_OFF;
-              break;
+        if (onOffButtonDown + BUTTON_PRESSED_SHORT <= millis()) {
+          //we pressed long enough 
+          Serial.println("We pressed long enough!");
+          if (isButtonOn(onOffPulse)) {
+            onOffCommand = POWER_SWITCH_ON; 
+          } 
+          else {
+            onOffCommand = POWER_SWITCH_OFF;
           }
         }
       } else {
@@ -171,4 +169,10 @@ bool ChannelIsOffCenter(int channelValue) {
   return ((channelValue >= RC_CHANNEL_MIDDLE + RC_CHANNEL_DEADBAND) ||
         (channelValue <= RC_CHANNEL_MIDDLE - RC_CHANNEL_DEADBAND));
 }
+
+
+bool isButtonOn(int channelValue) {
+  return (channelValue >= (RC_CHANNEL_MIDDLE + RC_CHANNEL_DEADBAND));
+}
+
 

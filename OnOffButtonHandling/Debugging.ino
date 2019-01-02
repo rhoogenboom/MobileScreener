@@ -97,8 +97,8 @@ void PrintDebugOutput() {
 //  PrintReceiverInputValues();
 //  PrintChannel(ON_OFF_CHANNEL_NR);
 //  PrintESCValues();
-//  PrintStates();
+  PrintStates();
 //  PrintPulses();
-  PrintEngineState();
+//  PrintEngineState();
 }
 

@@ -2,7 +2,8 @@
 #include <ESC.h>
 #include "defines.h"
 #include "variables.h"
-#include <PinChangeInterrupt.h>
+//#include <PinChangeInterrupt.h>
+//#include <EnableInterrupt.h>
 
 void setup() {
   //initialize boot vars
@@ -32,8 +33,9 @@ void setup() {
   attachInterrupt(digitalPinToInterrupt(CRUSHER_RC_PIN), calculateCrusherReceiverInput, CHANGE);
   attachInterrupt(digitalPinToInterrupt(TRACK_LEFT_RC_PIN), calculateTrackLeftReceiverInput, CHANGE);
   attachInterrupt(digitalPinToInterrupt(TRACK_RIGHT_RC_PIN), calculateTrackRightReceiverInput, CHANGE);
-  //attachInterrupt(digitalPinToInterrupt(ON_OFF_RC_PIN), calculateOnOffReceiverInput, CHANGE);
+//  attachInterrupt(digitalPinToInterrupt(ON_OFF_RC_PIN), calculateOnOffReceiverInput, CHANGE);
 //redefine on off channel to read busy pin of player
+
   attachInterrupt(digitalPinToInterrupt(PLAYER_BUSY_PIN), SetPlayerFree, RISING);
 
   //Read previous volume from EEPROM
@@ -68,7 +70,7 @@ void setup() {
 void loop() {
   if (startup) {
     delay(3000);
-    setVolume(volumeLevel);
+    setVolume(15); //setVolume(volumeLevel);
     
     Serial.println(F("Startup loop entering"));
     BeltESC.speed(BELT_ESC_STOP);
@@ -76,15 +78,16 @@ void loop() {
     CrusherESC.speed(CRUSHER_ESC_STOP);
 
     //start crusher engine
-    StartEngine();
-    onOffCommand = POWER_IS_ON;
+//    StartEngine();
+//    onOffCommand = POWER_IS_ON;
+//    Serial.println(F("Engine started"));
 
-    Serial.println(F("Engine started"));
-    
+    onOffCommand = POWER_IS_OFF;
+  
     Serial.println(F("Startup loop completed"));
     startup = false;
   }
-
+  
   HandleReceiverInput();
   PrintDebugOutput();
   //delay(2000);
