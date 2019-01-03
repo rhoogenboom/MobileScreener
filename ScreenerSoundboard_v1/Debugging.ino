@@ -96,7 +96,7 @@ void PrintDebugOutput() {
   delay(1000);
 //  PrintReceiverInputValues();
 //  PrintChannel(ON_OFF_CHANNEL_NR);
-//  PrintESCValues();
+  PrintESCValues();
   PrintStates();
 //  PrintPulses();
 //  PrintEngineState();

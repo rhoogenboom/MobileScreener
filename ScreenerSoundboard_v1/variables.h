@@ -13,8 +13,8 @@ volatile unsigned long timer_start[RC_CHANNEL_COUNT]; //start times for signal f
 volatile int channel_pulse_time[RC_CHANNEL_COUNT]; //keep track of the receiver values
 int button_pressed_time[RC_CHANNEL_COUNT]; //keep track of how long the button was pressed
 int button_pressed_value[RC_CHANNEL_COUNT]; //keep track of the button value
-int channelPins[RC_CHANNEL_COUNT] = {2,3,18,19,20};//,21};
-String channelNames[RC_CHANNEL_COUNT] = {"CRUSHER", "TRACK RAIL", "TRACK OTHER", "HOPPER", "BELT"};//, "ON/OFF"};
+int channelPins[RC_CHANNEL_COUNT] = {2,3,18,19,20,12};
+String channelNames[RC_CHANNEL_COUNT] = {"CRUSHER", "TRACK RAIL", "TRACK OTHER", "HOPPER", "BELT", "ON/OFF"};
 
 int crusherPulse = 0;
 

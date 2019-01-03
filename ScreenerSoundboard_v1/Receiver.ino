@@ -49,14 +49,17 @@ void HandleCrusher(){
   }
 }
 
-void HandleOnOffChannel() {
-  onOffPulse =  pulseIn(ON_OFF_RC_PIN, HIGH);
+void getOnOffChannelPulse() {
+  channel_pulse_time[ON_OFF_CHANNEL_NR] =  pulseIn(ON_OFF_RC_PIN, HIGH);
+}
 
+void HandleOnOffChannel() {
+  onOffPulse = channel_pulse_time[ON_OFF_CHANNEL_NR];
+  
   if (onOffPulse == 0) {
     //no receiver input or lost receiver input, maintain current values
   }
   else {
-    channel_pulse_time[ON_OFF_CHANNEL_NR] = onOffPulse;    
     //check if the pulse is considered a valid press
     if (ChannelIsOffCenter(onOffPulse)) {
       //button is pressed enough left or right
