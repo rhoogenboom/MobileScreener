@@ -39,5 +39,7 @@ bool engineIsRunning = false;
 bool playerBusy = false;
 byte volumeLevel;
 
-//SoftwareSerial SerialMP3Player(PLAYER_RX_PIN, PLAYER_TX_PIN);
+//LIGHTS
+OSL_SimpleTimer timer;  
+unsigned int quickBlinkTimerID;
 

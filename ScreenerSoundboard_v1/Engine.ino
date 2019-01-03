@@ -1,6 +1,3 @@
-//bool engineIsRunningHigh = false;
-//bool engineIsRunning = false;
-
 #define EngineVersion 3
 
 #define EngineStartFolder 1

@@ -87,14 +87,11 @@
 #define ON_OFF_MIDDLE (1500)
 
 
-//ENGINE
-#define ENGINE_VERSION 2 //file version of the audio files, name starting with 000X
+//LIGHTS
+#define quickBlinkInterval 1000
 
-#define ENGINE_START_FOLDER 1 //folder number which contains these files 00X
-#define ENGINE_LOW_FOLDER 2
-#define ENGINE_UP_FOLDER 3
-#define ENGINE_HIGH_FOLDER 4
-#define ENGINE_DOWN_FOLDER 5
-#define ENGINE_STOP_FOLDER 6
+#define RED_PIN 6
+#define GREEN_PIN 7
+#define WORKINGLIGHTS 5
 
 

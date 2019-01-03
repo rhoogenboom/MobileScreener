@@ -1,9 +1,8 @@
-//#include <SoftwareSerial.h>
+#include <OSL_SimpleTimer.h>
 #include <ESC.h>
 #include "defines.h"
 #include "variables.h"
 #include <PinChangeInterrupt.h>
-//#include <EnableInterrupt.h>
 
 void setup() {
   //initialize boot vars
