@@ -4,6 +4,21 @@ void HandleReceiverInput() {
   HandleBelt();
   HandleHopper();
   HandleCrusher();
+  HandleEngine();
+}
+
+void HandleEngine() {
+        //take action if we pressed long enough
+      switch (onOffCommand) {
+        case POWER_SWITCH_ON:
+          onOffCommand = POWER_IS_ON;
+          StartEngine();
+          break;
+        case POWER_SWITCH_OFF:
+          onOffCommand = POWER_IS_OFF;
+          StopEngine();
+          break;
+      }
 }
 
 void HandleCrusher(){
@@ -52,9 +67,11 @@ void HandleOnOffChannel() {
           Serial.println("We pressed long enough!");
           if (isButtonOn(onOffPulse)) {
             onOffCommand = POWER_SWITCH_ON; 
+            Serial.println("Button: ON");
           } 
           else {
             onOffCommand = POWER_SWITCH_OFF;
+            Serial.println("Button: OFF");
           }
         }
       } else {
@@ -64,18 +81,6 @@ void HandleOnOffChannel() {
     } else {
       // not pressing (anymore) 
       onOffButtonDown = 0; //reset counter on button pressed
-
-      //take action if we pressed long enough
-      switch (onOffCommand) {
-        case POWER_SWITCH_ON:
-          onOffCommand = POWER_IS_ON;
-          StartEngine();
-          break;
-        case POWER_SWITCH_OFF:
-          onOffCommand = POWER_IS_OFF;
-          StopEngine();
-          break;
-      }
     }
   }
 }

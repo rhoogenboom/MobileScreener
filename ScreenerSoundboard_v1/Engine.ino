@@ -1,7 +1,7 @@
 //bool engineIsRunningHigh = false;
 //bool engineIsRunning = false;
 
-#define EngineVersion 2
+#define EngineVersion 3
 
 #define EngineStartFolder 1
 #define EngineLowFolder 2
@@ -9,6 +9,7 @@
 #define EngineHighFolder 4
 #define EngineDownFolder 5
 #define EngineStopFolder 6
+#define InitializedBeep 7
 
 #define WarningBeepTrackNumber 1
 
@@ -20,13 +21,15 @@ void StopPlayingWarningBeep() {
   StopPlayingIntercut();
 }
 
+void Initialized() {
+  PlayFolderTrack(InitializedBeep, EngineVersion);  
+}
+
 void StartEngine() {
   if (!engineIsRunning) {
     engineIsRunningHigh = false;
     engineIsRunning = true;
-
-    StartPlayingWarningBeep();
-    
+   
     //Play startup
     PlayFolderTrack(EngineStartFolder, EngineVersion);
     //always wait 1 sec to allow the player to start playing
