@@ -18,10 +18,9 @@ void Load_EEPROM() {
 }
 
 void Write_EEPROM() {
-  eeprom_write(volumeLevel, E_volumeLevel);
-
   // This is our initialization constant
   eeprom_write(1, E_InitNum);
+  eeprom_write(volumeLevel, E_volumeLevel);
 
   Serial.print("Volume stored: "); Serial.println(volumeLevel);
 }
