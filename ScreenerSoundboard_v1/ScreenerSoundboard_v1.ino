@@ -2,7 +2,7 @@
 #include <ESC.h>
 #include "defines.h"
 #include "variables.h"
-//#include <PinChangeInterrupt.h>
+#include <PinChangeInterrupt.h>
 //#include <EnableInterrupt.h>
 
 void setup() {
@@ -35,8 +35,7 @@ void setup() {
   attachInterrupt(digitalPinToInterrupt(CRUSHER_RC_PIN), calculateCrusherReceiverInput, CHANGE);
   attachInterrupt(digitalPinToInterrupt(TRACK_LEFT_RC_PIN), calculateTrackLeftReceiverInput, CHANGE);
   attachInterrupt(digitalPinToInterrupt(TRACK_RIGHT_RC_PIN), calculateTrackRightReceiverInput, CHANGE);
-//  attachInterrupt(digitalPinToInterrupt(ON_OFF_RC_PIN), calculateOnOffReceiverInput, CHANGE);
-//redefine on off channel to read busy pin of player
+  attachPinChangeInterrupt(digitalPinToPinChangeInterrupt(ON_OFF_RC_PIN), calculateOnOffReceiverInput, CHANGE);
 
   attachInterrupt(digitalPinToInterrupt(PLAYER_BUSY_PIN), SetPlayerFree, RISING);
 
