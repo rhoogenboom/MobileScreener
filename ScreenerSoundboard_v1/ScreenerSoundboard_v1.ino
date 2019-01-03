@@ -70,7 +70,7 @@ void setup() {
 void loop() {
   if (startup) {
     delay(3000);
-    setVolume(15); //setVolume(volumeLevel);
+    setVolume(volumeLevel);
     
     Serial.println(F("Startup loop entering"));
     BeltESC.speed(BELT_ESC_STOP);
