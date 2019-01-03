@@ -1,5 +1,5 @@
 // EEPROM
-const long EEPROM_Init = 0xA01; 
+const long EEPROM_Init = 0xA02; 
 
 struct __eeprom_data { //  structure that maps all of the data we are storing in EEPROM
   long E_InitNum;      // Number that indicates if EEPROM values have ever been initialized
@@ -39,5 +39,5 @@ bool engineIsRunning = false;
 bool playerBusy = false;
 byte volumeLevel;
 
-SoftwareSerial SerialMP3Player(PLAYER_RX_PIN, PLAYER_TX_PIN);
+//SoftwareSerial SerialMP3Player(PLAYER_RX_PIN, PLAYER_TX_PIN);
 

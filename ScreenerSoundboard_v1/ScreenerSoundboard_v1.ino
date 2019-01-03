@@ -1,4 +1,4 @@
-#include <SoftwareSerial.h>
+//#include <SoftwareSerial.h>
 #include <ESC.h>
 #include "defines.h"
 #include "variables.h"
@@ -11,7 +11,9 @@ void setup() {
   Serial.println(F("Setting up"));
 
   //initialize audio player on serial comms
-  SerialMP3Player.begin(9600);
+  //SerialMP3Player.begin(9600);
+  //Replaced by Serial2
+  Serial2.begin(9600);
 
   //initiale RC channel values to 0
   for (int i=0; i<RC_CHANNEL_COUNT; i++ ) {
@@ -71,7 +73,7 @@ void loop() {
   if (startup) {
     delay(3000);
     setVolume(volumeLevel);
-    
+   
     Serial.println(F("Startup loop entering"));
     BeltESC.speed(BELT_ESC_STOP);
     HopperESC.speed(HOPPER_ESC_STOP);
@@ -86,6 +88,7 @@ void loop() {
   
     Serial.println(F("Startup loop completed"));
     startup = false;
+    Initialized();
   }
   
   HandleReceiverInput();
