@@ -3,7 +3,6 @@ void PrintReceiverInputValues() {
   for (int i=0; i<RC_CHANNEL_COUNT; ++i) {
     PrintChannel(i);
   }
-  delay(1000);
 }
 
 void PrintChannel(int channel) {
@@ -25,23 +24,15 @@ void PrintESCValues() {
 
 void PrintStates(){
   Serial.println(F("------------"));
-  Serial.print(F("Crusher is moving: ")); Serial.println(ParseCrusherMovingState(crusherIsMoving));
+  Serial.print(F("Crusher is moving: ")); PrintTrueFalse(crusherIsMoving);
   Serial.print(F("On/Off command: ")); Serial.println(ParseOnOffState(onOffCommand));
 }
 
 void PrintPulses(){
   Serial.println(F("------------"));
-  Serial.print(F("Crusher pulse: ")); Serial.println(crusherPulse);
-  Serial.print(F("Conveyor pulse: ")); Serial.println(beltPulse);
-  Serial.print(F("Hopper pulse: ")); Serial.println(hopperPulse);
-}
-
-String ParseCrusherMovingState(bool state) {
-  if (state) {
-    return "TRUE";
-  } else {
-    return "FALSE";
-  }
+  Serial.print(F("Crusher pulse: ")); Serial.print(crusherPulse); Serial.print(F("  mid:")); PrintTrueFalse(!ChannelIsOffCenter(crusherPulse));
+  Serial.print(F("Conveyor pulse: ")); Serial.print(beltPulse); Serial.print(F("  mid:")); PrintTrueFalse(!ChannelIsOffCenter(beltPulse));
+  Serial.print(F("Hopper pulse: ")); Serial.print(hopperPulse); Serial.print(F("  mid:")); PrintTrueFalse(!ChannelIsOffCenter(hopperPulse));
 }
 
 String ParseOnOffState(int state) {
@@ -63,10 +54,23 @@ String ParseOnOffState(int state) {
   }
 }
 
+String PrintEngineState() {
+  Serial.println(F("------------ENGINE"));
+  Serial.print(F("Engine is running: ")); PrintTrueFalse(engineIsRunning);
+  Serial.print(F("Engine is running high: ")); PrintTrueFalse(engineIsRunningHigh);
+}
+
+void PrintTrueFalse(boolean boolVal)
+{
+    if (boolVal == true) { Serial.println(F("TRUE")); } else { Serial.println(F("FALSE")); }
+}
+
 void PrintDebugOutput() {
-  PrintReceiverInputValues();
-  PrintESCValues();
+  delay(1000);
+//  PrintReceiverInputValues();
+//  PrintESCValues();
   PrintStates();
   PrintPulses();
+  PrintEngineState();
 }
 

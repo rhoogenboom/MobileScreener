@@ -4,13 +4,13 @@
 #define TRACK_RIGHT_RC_PIN (18)  
 #define HOPPER_RC_PIN (19) 
 #define BELT_RC_PIN (20)  
-#define ON_OFF_RC_PIN (21) //nano: digital 12
+#define ON_OFF_RC_PIN (12) //nano: digital 12
 
 #define CRUSHER_ESC_PIN (4)  
 #define HOPPER_ESC_PIN (5) 
 #define BELT_ESC_PIN (6)  
 
-#define PLAYER_BUSY_PIN (9) //notify when player is done playing and available, requires interrupt?? switch with on/off pin?
+#define PLAYER_BUSY_PIN (21) //notify when player is done playing and available, requires interrupt?? switch with on/off pin?
 #define PLAYER_RX_PIN (10) //TX to player
 #define PLAYER_TX_PIN (11) //RX from player
 
@@ -50,9 +50,9 @@
 #define CRUSHER_ESC_MED (300)
 #define CRUSHER_ESC_HIGH (500)
 
-#define RC_CHANNEL_COUNT (6) //number of receiver channels hooked up to arduino
+#define RC_CHANNEL_COUNT (5) //number of receiver channels hooked up to arduino
 #define RC_CHANNEL_DEADBAND (10) //fluctuations around the channel center smaller than this we ignore
-#define RC_CHANNEL_MIDDLE (5) //fluctuations around the channel center smaller than this we ignore
+#define RC_CHANNEL_MIDDLE (1500) //fluctuations around the channel center smaller than this we ignore
 
 #define ON_OFF_MIN (1000)
 #define ON_OFF_MAX (2000)

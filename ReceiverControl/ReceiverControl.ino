@@ -1,4 +1,4 @@
-//#include <SoftwareSerial.h>
+#include <SoftwareSerial.h>
 #include <ESC.h>
 #include "defines.h"
 #include "variables.h"
@@ -9,6 +9,9 @@ void setup() {
   Serial.begin(9600);
   Serial.println(F("Setting up"));
 
+  //initialize audio player on serial comms
+  SerialMP3Player.begin(9600);
+
   //initiale RC channel values to 0
   for (int i=0; i<RC_CHANNEL_COUNT; i++ ) {
     timer_start[i] = 0; 
@@ -16,26 +19,23 @@ void setup() {
   }
 
   //initialize pins
-//  pinMode(HOPPER_RC_PIN, INPUT_PULLUP);
-//  pinMode(BELT_RC_PIN, INPUT_PULLUP);
-//  pinMode(CRUSHER_RC_PIN, INPUT_PULLUP);
-//  pinMode(TRACK_LEFT_RC_PIN, INPUT_PULLUP);   
-//  pinMode(TRACK_RIGHT_RC_PIN, INPUT_PULLUP);   
-//  pinMode(ON_OFF_PIN, INPUT_PULLUP);   
-
-//  //connect receiver and int handlers
+  //connect receiver and int handlers
   pinMode(HOPPER_RC_PIN, INPUT);
   pinMode(BELT_RC_PIN, INPUT);
   pinMode(CRUSHER_RC_PIN, INPUT);
   pinMode(TRACK_LEFT_RC_PIN, INPUT);   
   pinMode(TRACK_RIGHT_RC_PIN, INPUT);   
   pinMode(ON_OFF_RC_PIN, INPUT);   
+
   attachInterrupt(digitalPinToInterrupt(HOPPER_RC_PIN), calculateHopperReceiverInput, CHANGE);
   attachInterrupt(digitalPinToInterrupt(BELT_RC_PIN), calculateBeltReceiverInput, CHANGE);
   attachInterrupt(digitalPinToInterrupt(CRUSHER_RC_PIN), calculateCrusherReceiverInput, CHANGE);
   attachInterrupt(digitalPinToInterrupt(TRACK_LEFT_RC_PIN), calculateTrackLeftReceiverInput, CHANGE);
   attachInterrupt(digitalPinToInterrupt(TRACK_RIGHT_RC_PIN), calculateTrackRightReceiverInput, CHANGE);
-  attachInterrupt(digitalPinToInterrupt(ON_OFF_RC_PIN), calculateOnOffReceiverInput, CHANGE);
+  //attachInterrupt(digitalPinToInterrupt(ON_OFF_RC_PIN), calculateOnOffReceiverInput, CHANGE);
+//redefine on off channel to read busy pin of player
+  attachInterrupt(digitalPinToInterrupt(PLAYER_BUSY_PIN), SetPlayerFree, RISING);
+
 
   delay(2500);
   
@@ -49,15 +49,21 @@ void setup() {
 
 void loop() {
   if (startup) {
-    Serial.println(F("Starting"));
+    delay(3000);
+    setVolume(20);
+    
+    Serial.println(F("Startup loop entering"));
     BeltESC.speed(BELT_ESC_STOP);
     HopperESC.speed(HOPPER_ESC_STOP);
     CrusherESC.speed(CRUSHER_ESC_STOP);
 
     //start crusher engine
-   // StartEngine();
+    StartEngine();
+    onOffCommand = POWER_IS_ON;
+
+    Serial.println(F("Engine started"));
     
-    Serial.println(F("Started"));
+    Serial.println(F("Startup loop completed"));
     startup = false;
   }
 

@@ -10,37 +10,44 @@ bool engineIsRunning = false;
 #define EngineDownFolder 5
 #define EngineStopFolder 6
 
+#define WarningBeepTrackNumber 1
+
+void StartPlayingWarningBeep() {
+  StartPlayingIntercut(WarningBeepTrackNumber);  
+}
+
+void StopPlayingWarningBeep() {
+  StopPlayingIntercut();  
+}
+
 void StartEngine() {
   engineIsRunningHigh = false;
   engineIsRunning = true;
   
-  //Play startup
   PlayFolderTrack(EngineStartFolder, EngineVersion);
 
-  //Wait till ready / delay Xms
-  wait();
-
-  //Start loop engine low
-  RepeatPlaybackFolder(EngineLowFolder);
+  trackQueue.enqueue(BitShiftCombine(0, EngineLowFolder));
+  actionQueue.enqueue('R');
 }
 
 void EngineUp() {
   //Play rev up
-  PlayFolderTrack(EngineUpFolder, EngineVersion);
-  //Wait till ready / delay Xms
-  wait();
-  
+  trackQueue.enqueue(BitShiftCombine(EngineUpFolder, EngineVersion));
+  actionQueue.enqueue('P');
+
   //Start loop engine high
-  RepeatPlaybackFolder(EngineHighFolder);
+  trackQueue.enqueue(BitShiftCombine(0, EngineHighFolder));
+  actionQueue.enqueue('R');
+ 
   engineIsRunningHigh = true;
 }
 
 void EngineDown() {
   //Play rev down
   PlayFolderTrack(EngineDownFolder, EngineVersion);
-  
+ 
   //Wait till ready / delay Xms
-  wait();
+  wait(2500);
   
   //Start loop engine low
   RepeatPlaybackFolder(EngineLowFolder);
@@ -58,7 +65,7 @@ void StopEngine() {
   engineIsRunning = false;
   //Play engine stop
   PlayFolderTrack(EngineStopFolder, EngineVersion);
-  wait();
+  wait(1500);
 }
 
 bool PlaySequence(int sequenceLength, int sequence[5]) {

@@ -1,5 +1,5 @@
 void HandleReceiverInput() {
-  HandleOnOffChannel();
+//  HandleOnOffChannel();
   HandleDriving();
   HandleBelt();
   HandleHopper();
@@ -13,44 +13,22 @@ void HandleCrusher(){
     //no receiver input or lost receiver input, maintain current values
   }
   else {
-//    //check if the pulse is considered a valid press
-//    if (ChannelIsOffCenter(crusherPulse)) {
-//      //button is pressed enough left or right
-//      if (crusherButtonDown > 0) {
-//        //if we had pressed before, check if we have pressed long enough to make a switch
-//        if ((crusherButtonDown + BUTTON_PRESSED_SHORT >= millis()) && 
-//               crusherCommand != CRUSHER_SWITCH_ON &&
-//                crusherCommand != CRUSHER_SWITCH_OFF) {
-//                  //we pressed long enough and we have not started switching yet
-//          switch (CrusherCommand) {
-//            case CRUSHER_IS_OFF:
-//              crusherCommand = CRUSHER_SWITCH_ON;
-//              break;
-//            case CRUSHER_IS_ON:
-//              crusherCommand = CRUSHER_SWITCH_OFF;
-//              break;
-//          }
-//        }
-//      } else {
-//        //started pressing the button so take timing and state
-//        crusherButtonDown = millis();
-//      }
-//    } else {
-//      // not pressing (anymore) 
-//      crusherButtonDown = 0; //reset counter on button pressed
-//
-//      //take action if we pressed long enough
-//      switch (crusherCommand) {
-//        case CRUSHER_SWITCH_ON:
-//          crusherCommand = CRUSHER_IS_ON;
-//          StartEngine();
-//          break;
-//        case CRUSHER_SWITCH_OFF:
-//          crusherCommand = CRUSHER_IS_OFF;
-//          StopEngine();
-//          break;
-//      }
-//    }
+    //check if the pulse is considered a valid press
+    if (ChannelIsOffCenter(crusherPulse)) {
+      // check if engine is running, if not start, update state, wait, throttle up
+      if (onOffCommand == POWER_IS_ON && !engineIsRunningHigh) {
+        // we have switched on the engine, throttle up
+        Serial.println("We've hit engine up!!!!!" );
+        EngineUp();
+      }
+      
+    } else {
+      //if running engine and running high, throttle down
+      if (onOffCommand == POWER_IS_ON && engineIsRunningHigh) {
+        // we have switched on the engine, throttle up
+        EngineDown();
+      }
+    }
     //set the output ESC channel
     CrusherESC.speed(crusherPulse);
   }

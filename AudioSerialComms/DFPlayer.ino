@@ -11,13 +11,28 @@
 #define SingleRepeatPlayback 3
 #define RandomPlayback 4
 
-void wait()
+void SetPlayerFree() {
+  playerBusy = false;
+  // only change from loop to single or from single to loops
+  if (actionQueue.peek() == 'P') {
+    char action = actionQueue.dequeue();
+    int folderAndTrack = trackQueue.dequeue();
+  
+    if (action == 'R') {
+      RepeatPlaybackFolder(BitShiftGetLow(folderAndTrack));
+    }
+    if (action == 'P') {
+      PlayFolderTrack(BitShiftGetHigh(folderAndTrack), BitShiftGetLow(folderAndTrack));
+    }
+  }
+}
+
+void wait(unsigned int minimalWaitTime)
 {
-  int busy = 0;
-  while (true) {
-     int bsy = digitalRead(busyPin);
-     if (busy == 1 && bsy == 1) break;
-     if (bsy == 0) busy = 1;
+  playerBusy = true;
+  delay(minimalWaitTime);
+  while (playerBusy) {
+    //Serial.print(F("Player is busy: ")); //PrintTrueFalse(playerBusy);
   }
 }
 
@@ -32,20 +47,32 @@ void SleepPlayer() {
 
 void PlayFolderTrack(byte folderNumber, byte trackNumber)
 {
+  playerBusy = true;
   RepeatPlaybackOff();
-  ExecuteCommand(0x0F, folderNumber, trackNumber, false);
+  ExecuteCommand(0x0F, folderNumber, trackNumber, true);
 }
 
 void RepeatPlaybackFolder(byte folderNumber) {
-  ExecuteCommand(0x17, 0, folderNumber, false);
+  playerBusy = true;
+  ExecuteCommand(0x17, 0, folderNumber, true);
 }
 
 void RepeatPlaybackOn() {
+  playerBusy = true;
   ExecuteCommand(0x11, 0, 1, true);
 }
 
 void RepeatPlaybackOff() {
+  playerBusy = true;
   ExecuteCommand(0x11, 0, 0, true);  
+}
+
+void StartPlayingIntercut(byte trackNumber) {
+  ExecuteCommand(0x13, 0, trackNumber, true);
+}
+
+void StopPlayingIntercut() {
+  ExecuteCommand(0x15, 0, 0, true);
 }
 
 void setVolume(int volume)
@@ -65,10 +92,10 @@ void ExecuteCommand(byte CMD, byte Par1, byte Par2, bool wait)
   //Send the command line to the module
   for (byte k=0; k<10; k++)
   {
-    mySerial.write( Command_line[k]);
+    SerialMP3Player.write( Command_line[k]);
   }
   //wait when we want to
   if (wait) {
-    delay(25);
+    delay(100);
   }
 }
