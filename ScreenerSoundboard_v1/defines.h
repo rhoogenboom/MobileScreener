@@ -86,12 +86,13 @@
 #define BAD_MAX_PULSE (2500)
 #define ON_OFF_MIDDLE (1500)
 
+#define quickBlinkSequence 5500
 
 //LIGHTS
 #define quickBlinkInterval 1000
 
-#define RED_PIN 6
-#define GREEN_PIN 7
-#define WORKINGLIGHTS 5
+#define WORKINGLIGHTS 34
+#define GREEN_PIN 38
+#define RED_PIN 42
 
 

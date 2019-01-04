@@ -18,7 +18,7 @@ void StopPlayingWarningBeep() {
   StopPlayingIntercut();
 }
 
-void Initialized() {
+void PlayInitializedBeep() {
   PlayFolderTrack(InitializedBeep, EngineVersion);  
 }
 
