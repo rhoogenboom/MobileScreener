@@ -41,5 +41,9 @@ byte volumeLevel;
 
 //LIGHTS
 OSL_SimpleTimer timer;  
-unsigned int quickBlinkTimerID;
+unsigned int redBlinkTimerID;
+unsigned int greenBlinkTimerID;
+
+bool greenLEDState = LOW;
+bool redLEDState = LOW;
 

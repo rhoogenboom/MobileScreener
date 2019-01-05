@@ -1,8 +1,8 @@
-void setWorkLightsOn() {
+void SetWorkLightsOn() {
   digitalWrite(WORKINGLIGHTS, HIGH);
 }
 
-void setWorkLightsOff() {
+void SetWorkLightsOff() {
   digitalWrite(WORKINGLIGHTS, LOW);
 }
 
@@ -23,15 +23,35 @@ void QuickBlickSequence() {
   QuickBlink(RED_PIN);
 }
 
-void createQBTimer() {
+void SlowGreenBlink() {
+  greenLEDState = !greenLEDState;
+  digitalWrite(GREEN_PIN, greenLEDState);  
+}
+
+void FastRedBlink() {
+  redLEDState = !redLEDState;
+  digitalWrite(RED_PIN, redLEDState);  
+}
+
+void StartSlowGreenBlink() {
+  greenBlinkTimerID = timer.setInterval(slowBlinkInterval, SlowGreenBlink);
+}
+
+void StopSlowGreenBlink() {
+  timer.deleteTimer(greenBlinkTimerID);
+  digitalWrite(GREEN_PIN, LOW);
+}
+
+void CreateQBTimer() {
   timer.setTimer(quickBlinkInterval, QuickBlickSequence, 5);
 }
 
-void StartQuickBlinkTimer() {
-  quickBlinkTimerID = timer.setInterval(quickBlinkInterval, QuickBlickSequence);
+void StartQuickRedBlink() {
+  redBlinkTimerID = timer.setInterval(fastBlinkInterval, FastRedBlink);
 }
 
-void StopQuickBlinkTimer() {
-  timer.deleteTimer(quickBlinkTimerID);
+void StopQuickRedBlink() {
+  timer.deleteTimer(redBlinkTimerID);
+  digitalWrite(RED_PIN, LOW);  
 }
 

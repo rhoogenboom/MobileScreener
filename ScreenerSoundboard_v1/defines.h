@@ -90,6 +90,8 @@
 
 //LIGHTS
 #define quickBlinkInterval 1000
+#define slowBlinkInterval 750
+#define fastBlinkInterval 100
 
 #define WORKINGLIGHTS 34
 #define GREEN_PIN 38

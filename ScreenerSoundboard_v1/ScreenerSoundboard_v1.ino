@@ -84,14 +84,17 @@ void loop() {
     HopperESC.speed(HOPPER_ESC_STOP);
     CrusherESC.speed(CRUSHER_ESC_STOP);
 
-
-    
+    SetWorkLightsOn();    
+    StartSlowGreenBlink();
+  
     Serial.println(F("Startup loop completed"));
     startup = false;
     PlayInitializedBeep();
   }
+
+  timer.run();
   
   HandleReceiverInput();
-  PrintDebugOutput();
+  //PrintDebugOutput();
   //delay(2000);
 }

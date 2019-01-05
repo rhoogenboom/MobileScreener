@@ -21,7 +21,8 @@ void wait(unsigned int minimalWaitTime)
   playerBusy = true;
   delay(minimalWaitTime);
   while (playerBusy) {
-    Serial.print(F("Player is busy: ")); PrintTrueFalse(playerBusy);
+    timer.run();
+    //Serial.print(F("Player is busy: ")); PrintTrueFalse(playerBusy);
   }
 }
 

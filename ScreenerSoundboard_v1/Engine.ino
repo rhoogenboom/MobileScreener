@@ -32,7 +32,7 @@ void StartEngine() {
     //always wait 1 sec to allow the player to start playing
 
     //Wait till ready / delay Xms
-    wait(1500);
+    wait(500);
 
     //Start loop engine low
     RepeatPlaybackFolder(EngineLowFolder);
@@ -47,6 +47,7 @@ void EngineUp() {
 
   //Start loop engine high
   RepeatPlaybackFolder(EngineHighFolder);
+  StartQuickRedBlink();    
   engineIsRunningHigh = true;
 }
 
@@ -59,6 +60,7 @@ void EngineDown() {
 
   //Start loop engine low
   RepeatPlaybackFolder(EngineLowFolder);
+  StopQuickRedBlink();
   engineIsRunningHigh = false;
 }
 
@@ -67,9 +69,6 @@ void StopEngine() {
     //check if engine is high
     if (engineIsRunningHigh) {
       EngineDown();
-
-      //Wait till ready / delay Xms
-      engineIsRunningHigh = false;
     }
     //Play engine stop
     PlayFolderTrack(EngineStopFolder, EngineVersion);

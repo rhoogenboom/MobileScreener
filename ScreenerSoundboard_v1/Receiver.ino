@@ -11,12 +11,17 @@ void HandleEngine() {
         //take action if we pressed long enough
       switch (onOffCommand) {
         case POWER_SWITCH_ON:
-          createQBTimer();
-          timer.setTimeout(quickBlinkSequence, StartEngine);
+          StopSlowGreenBlink();
+          SetWorkLightsOn();
+          CreateQBTimer();
+          //timer.setTimeout(quickBlinkSequence, StartEngine);
+          StartEngine();      
           onOffCommand = POWER_IS_ON;
           break;
         case POWER_SWITCH_OFF:
           StopEngine();
+          StartSlowGreenBlink();
+          SetWorkLightsOff();          
           onOffCommand = POWER_IS_OFF;
           break;
       }
