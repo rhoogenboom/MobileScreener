@@ -11,28 +11,32 @@
 #define WarningBeepTrackNumber 1
 
 void StartPlayingWarningBeep() {
-  StartPlayingIntercut(WarningBeepTrackNumber);
+  if (!crusherIsMoving) {
+    StartPlayingIntercut(WarningBeepTrackNumber);
+  }
 }
 
 void StopPlayingWarningBeep() {
-  StopPlayingIntercut();
+  if (crusherIsMoving) {
+    StopPlayingIntercut();
+  }
 }
 
 void PlayInitializedBeep() {
-  PlayFolderTrack(InitializedBeep, EngineVersion);  
+  PlayFolderTrack(InitializedBeep, EngineVersion);
 }
 
 void StartEngine() {
   if (!engineIsRunning) {
     engineIsRunningHigh = false;
     engineIsRunning = true;
-   
+
     //Play startup
     PlayFolderTrack(EngineStartFolder, EngineVersion);
     //always wait 1 sec to allow the player to start playing
 
     //Wait till ready / delay Xms
-    wait(500);
+    wait(1);//wait(500);
 
     //Start loop engine low
     RepeatPlaybackFolder(EngineLowFolder);
@@ -43,11 +47,11 @@ void EngineUp() {
   //Play rev up
   PlayFolderTrack(EngineUpFolder, EngineVersion);
   //Wait till ready / delay Xms
-  wait(1500);
+  wait(1);//wait(1500);
 
   //Start loop engine high
   RepeatPlaybackFolder(EngineHighFolder);
-  StartQuickRedBlink();    
+  StartQuickRedBlink();
   engineIsRunningHigh = true;
 }
 
@@ -56,7 +60,7 @@ void EngineDown() {
   PlayFolderTrack(EngineDownFolder, EngineVersion);
 
   //Wait till ready / delay Xms
-  wait(2500);
+  wait(1);//wait(2500);
 
   //Start loop engine low
   RepeatPlaybackFolder(EngineLowFolder);
@@ -72,7 +76,7 @@ void StopEngine() {
     }
     //Play engine stop
     PlayFolderTrack(EngineStopFolder, EngineVersion);
-    wait(1500);
+    wait(1);//wait(1500);
     engineIsRunning = false;
   }
 }
