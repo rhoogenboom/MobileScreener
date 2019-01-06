@@ -87,6 +87,6 @@ void ExecuteCommand(byte CMD, byte Par1, byte Par2, bool wait)
   }
   //wait when we want to
   if (wait) {
-    delay(100);
+    delay(50);
   }
 }
