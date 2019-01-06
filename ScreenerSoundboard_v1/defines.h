@@ -21,8 +21,8 @@
 #define BELT_ESC_PIN (6)  
 
 #define PLAYER_BUSY_PIN (21) //notify when player is done playing and available, requires interrupt?? switch with on/off pin?
-#define PLAYER_RX_PIN (10) //connected to TX on player - 17-Serial2 RX
-#define PLAYER_TX_PIN (11) //connected to RX on player - 16-Serial2 TX
+#define PLAYER_RX_PIN (17) //connected to TX on player - Serial2 17-RX //v3.0 PIN 10
+#define PLAYER_TX_PIN (16) //connected to RX on player - Serial2 16-TX //v3.0 PIN 11
 
 //ARRAY NUMERING
 #define CRUSHER_CHANNEL_NR (0) 
