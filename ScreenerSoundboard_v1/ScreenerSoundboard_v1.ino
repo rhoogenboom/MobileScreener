@@ -1,9 +1,8 @@
-//#include <SoftwareSerial.h>
+#include <OSL_SimpleTimer.h>
 #include <ESC.h>
 #include "defines.h"
 #include "variables.h"
 #include <PinChangeInterrupt.h>
-//#include <EnableInterrupt.h>
 
 void setup() {
   //initialize boot vars
@@ -30,6 +29,10 @@ void setup() {
   pinMode(TRACK_RIGHT_RC_PIN, INPUT);   
   pinMode(ON_OFF_RC_PIN, INPUT);   
 
+  pinMode(WORKINGLIGHTS, OUTPUT);
+  pinMode(GREEN_PIN, OUTPUT);
+  pinMode(RED_PIN, OUTPUT);
+  
   attachInterrupt(digitalPinToInterrupt(HOPPER_RC_PIN), calculateHopperReceiverInput, CHANGE);
   attachInterrupt(digitalPinToInterrupt(BELT_RC_PIN), calculateBeltReceiverInput, CHANGE);
   attachInterrupt(digitalPinToInterrupt(CRUSHER_RC_PIN), calculateCrusherReceiverInput, CHANGE);
@@ -57,14 +60,17 @@ void setup() {
     Load_EEPROM();         
   }
 
-
   delay(2500);
   
   //connect ESCs
   BeltESC.arm();
   HopperESC.arm();
   CrusherESC.arm();
+
+  onOffCommand = POWER_IS_OFF;
+
   delay(2500);
+  
   Serial.println(F("Setup done"));
 }
 
@@ -78,19 +84,17 @@ void loop() {
     HopperESC.speed(HOPPER_ESC_STOP);
     CrusherESC.speed(CRUSHER_ESC_STOP);
 
-    //start crusher engine
-//    StartEngine();
-//    onOffCommand = POWER_IS_ON;
-//    Serial.println(F("Engine started"));
-
-    onOffCommand = POWER_IS_OFF;
+    SetWorkLightsOn();    
+    StartSlowGreenBlink();
   
     Serial.println(F("Startup loop completed"));
     startup = false;
-    Initialized();
+    PlayInitializedBeep();
   }
+
+  timer.run();
   
   HandleReceiverInput();
-  PrintDebugOutput();
+  //PrintDebugOutput();
   //delay(2000);
 }

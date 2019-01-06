@@ -1,6 +1,3 @@
-//bool engineIsRunningHigh = false;
-//bool engineIsRunning = false;
-
 #define EngineVersion 3
 
 #define EngineStartFolder 1
@@ -14,28 +11,32 @@
 #define WarningBeepTrackNumber 1
 
 void StartPlayingWarningBeep() {
-  StartPlayingIntercut(WarningBeepTrackNumber);
+  if (!crusherIsMoving) {
+    StartPlayingIntercut(WarningBeepTrackNumber);
+  }
 }
 
 void StopPlayingWarningBeep() {
-  StopPlayingIntercut();
+  if (crusherIsMoving) {
+    StopPlayingIntercut();
+  }
 }
 
-void Initialized() {
-  PlayFolderTrack(InitializedBeep, EngineVersion);  
+void PlayInitializedBeep() {
+  PlayFolderTrack(InitializedBeep, EngineVersion);
 }
 
 void StartEngine() {
   if (!engineIsRunning) {
     engineIsRunningHigh = false;
     engineIsRunning = true;
-   
+
     //Play startup
     PlayFolderTrack(EngineStartFolder, EngineVersion);
     //always wait 1 sec to allow the player to start playing
 
     //Wait till ready / delay Xms
-    wait(1500);
+    wait(1);//wait(500);
 
     //Start loop engine low
     RepeatPlaybackFolder(EngineLowFolder);
@@ -46,10 +47,11 @@ void EngineUp() {
   //Play rev up
   PlayFolderTrack(EngineUpFolder, EngineVersion);
   //Wait till ready / delay Xms
-  wait(1500);
+  wait(1);//wait(1500);
 
   //Start loop engine high
   RepeatPlaybackFolder(EngineHighFolder);
+  StartQuickRedBlink();
   engineIsRunningHigh = true;
 }
 
@@ -58,10 +60,11 @@ void EngineDown() {
   PlayFolderTrack(EngineDownFolder, EngineVersion);
 
   //Wait till ready / delay Xms
-  wait(2500);
+  wait(1);//wait(2500);
 
   //Start loop engine low
   RepeatPlaybackFolder(EngineLowFolder);
+  StopQuickRedBlink();
   engineIsRunningHigh = false;
 }
 
@@ -70,13 +73,10 @@ void StopEngine() {
     //check if engine is high
     if (engineIsRunningHigh) {
       EngineDown();
-
-      //Wait till ready / delay Xms
-      engineIsRunningHigh = false;
     }
     //Play engine stop
     PlayFolderTrack(EngineStopFolder, EngineVersion);
-    wait(1500);
+    wait(1);//wait(1500);
     engineIsRunning = false;
   }
 }
