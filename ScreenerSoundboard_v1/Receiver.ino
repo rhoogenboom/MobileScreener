@@ -8,26 +8,26 @@ void HandleReceiverInput() {
 }
 
 void HandleEngine() {
-        //take action if we pressed long enough
-      switch (onOffCommand) {
-        case POWER_SWITCH_ON:
-          StopSlowGreenBlink();
-          SetWorkLightsOn();
-          CreateQBTimer();
-          //timer.setTimeout(quickBlinkSequence, StartEngine);
-          StartEngine();      
-          onOffCommand = POWER_IS_ON;
-          break;
-        case POWER_SWITCH_OFF:
-          StopEngine();
-          StartSlowGreenBlink();
-          SetWorkLightsOff();          
-          onOffCommand = POWER_IS_OFF;
-          break;
-      }
+  //take action if we pressed long enough
+  switch (onOffCommand) {
+    case POWER_SWITCH_ON:
+      StopSlowGreenBlink();
+      SetWorkLightsOn();
+      CreateQBTimer();
+      //timer.setTimeout(quickBlinkSequence, StartEngine);
+      StartEngine();
+      onOffCommand = POWER_IS_ON;
+      break;
+    case POWER_SWITCH_OFF:
+      StopEngine();
+      StartSlowGreenBlink();
+      SetWorkLightsOff();
+      onOffCommand = POWER_IS_OFF;
+      break;
+  }
 }
 
-void HandleCrusher(){
+void HandleCrusher() {
   crusherPulse =  channel_pulse_time[CRUSHER_CHANNEL_NR];
 
   if (crusherPulse == 0) {
@@ -42,7 +42,7 @@ void HandleCrusher(){
         Serial.println("We've hit engine up!!!!!" );
         EngineUp();
       }
-      
+
     } else {
       //if running engine and running high, throttle down
       if (onOffCommand == POWER_IS_ON && engineIsRunningHigh) {
@@ -61,7 +61,7 @@ void getOnOffChannelPulse() {
 
 void HandleOnOffChannel() {
   onOffPulse = channel_pulse_time[ON_OFF_CHANNEL_NR];
-  
+
   if (onOffPulse == 0) {
     //no receiver input or lost receiver input, maintain current values
   }
@@ -72,12 +72,12 @@ void HandleOnOffChannel() {
       if (onOffButtonDown != 0) {
         //if we had pressed before, check if we have pressed long enough to make a switch
         if (onOffButtonDown + BUTTON_PRESSED_SHORT <= millis()) {
-          //we pressed long enough 
+          //we pressed long enough
           Serial.println("We pressed long enough!");
           if (isButtonOn(onOffPulse)) {
-            onOffCommand = POWER_SWITCH_ON; 
+            onOffCommand = POWER_SWITCH_ON;
             Serial.println("Button: ON");
-          } 
+          }
           else {
             onOffCommand = POWER_SWITCH_OFF;
             Serial.println("Button: OFF");
@@ -88,7 +88,7 @@ void HandleOnOffChannel() {
         onOffButtonDown = millis();
       }
     } else {
-      // not pressing (anymore) 
+      // not pressing (anymore)
       onOffButtonDown = 0; //reset counter on button pressed
     }
   }
@@ -103,16 +103,18 @@ void HandleDriving() {
   }
   else {
     //check if the pulse is considered a valid press
-    if ( ChannelIsOffCenter(drivingPulseLeft) || 
-          ChannelIsOffCenter(drivingPulseRight) ) {
-        //we have signal on the tracks so crusher is moving
-        //TODO: play crusher moving warning signal
-        crusherIsMoving = true;
-      } 
-      else {
-        //TODO: stop playing crusher moving warning signal if we are playing something
-        crusherIsMoving = false;
-      }
+    if ( ChannelIsOffCenter(drivingPulseLeft) ||
+         ChannelIsOffCenter(drivingPulseRight) ) {
+      //we have signal on crusherIsMovingthe tracks so crusher is moving
+      //TODO: play crusher moving warning signal
+      StartPlayingWarningBeep();
+      crusherIsMoving = true;
+    }
+    else {
+      //TODO: stop playing crusher moving warning signal if we are playing something
+      StopPlayingIntercut();
+      crusherIsMoving = false;
+    }
   }
 }
 
@@ -147,16 +149,16 @@ void calcSignal(int channel, int pinNumber)
   {
     timer_start[channel] = micros();
   }
-  //otherwise, the pin has gone LOW 
+  //otherwise, the pin has gone LOW
   else
   {
-        //only worry about this if the timer has actually started
-        if(timer_start[channel] != 0)
-        { 
-          //record the pulse time
-          channel_pulse_time[channel] = ((volatile int)micros() - timer_start[channel]);
-          timer_start[channel] = 0;
-        }
+    //only worry about this if the timer has actually started
+    if (timer_start[channel] != 0)
+    {
+      //record the pulse time
+      channel_pulse_time[channel] = ((volatile int)micros() - timer_start[channel]);
+      timer_start[channel] = 0;
+    }
   }
 }
 
@@ -181,7 +183,7 @@ void calculateOnOffReceiverInput() {
 
 bool ChannelIsOffCenter(int channelValue) {
   return ((channelValue >= RC_CHANNEL_MIDDLE + RC_CHANNEL_DEADBAND) ||
-        (channelValue <= RC_CHANNEL_MIDDLE - RC_CHANNEL_DEADBAND));
+          (channelValue <= RC_CHANNEL_MIDDLE - RC_CHANNEL_DEADBAND));
 }
 
 
