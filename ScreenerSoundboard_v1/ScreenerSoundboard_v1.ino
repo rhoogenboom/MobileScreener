@@ -4,6 +4,17 @@
 #include "variables.h"
 #include <PinChangeInterrupt.h>
 
+// Screener sound board 
+// works with PCB version 4.0
+//
+// PCB revision history:
+//
+// version 4.0
+// - onboard volume buttons
+// - software serial pins for MP3 player, requires rewiring to serial2 ports
+// - 3 LED outputs
+
+
 void setup() {
   //initialize boot vars
   Serial.begin(9600);
