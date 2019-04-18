@@ -9,12 +9,13 @@
 // works with PCB version X.X
 //
 // PCB revision history:
-// version X.X
+// version 5.0
 // - external pins for: 
 // - track left/right forward/reverse - 4 pins
 // - power on/off sequence - 1 pin
 // - work lights on/off - 1 pin
 // - volume - 2 pins
+// - passthrough wiring for left and right track incoming channel
 //
 // version 4.0
 // - onboard volume buttons
