@@ -105,8 +105,7 @@ void HandleDriving() {
     //check if the pulse is considered a valid press
     if ( ChannelIsOffCenter(drivingPulseLeft) ||
          ChannelIsOffCenter(drivingPulseRight) ) {
-      //we have signal on crusherIsMovingthe tracks so crusher is moving
-      //TODO: play crusher moving warning signal
+      //we have signal on the tracks so crusher is moving
       StartPlayingWarningBeep();
       crusherIsMoving = true;
     }
