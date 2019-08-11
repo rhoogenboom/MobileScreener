@@ -2,6 +2,7 @@ void HandleReceiverInput() {
   //buttons
   HandleVolumeButtons();
   HandleOnOffButton();
+  HandleLightsButton();
 
   //receiver input
   HandleOnOffChannel();

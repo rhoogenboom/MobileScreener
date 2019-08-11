@@ -1,8 +1,10 @@
 void SetWorkLightsOn() {
+  lightsAreOn = true;
   digitalWrite(WORKINGLIGHTS, HIGH);
 }
 
 void SetWorkLightsOff() {
+  lightsAreOn = false;
   digitalWrite(WORKINGLIGHTS, LOW);
 }
 

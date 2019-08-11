@@ -49,6 +49,7 @@ void StartEngine() {
 }
 
 void EngineUp() {
+  StartQuickRedBlink();
   //Play rev up
   Serial.println(F("PlayFolderTrack(EngineUpFolder, EngineVersion)"));
   PlayFolderTrack(EngineUpFolder, EngineVersion);
@@ -58,7 +59,6 @@ void EngineUp() {
   //Start loop engine high
   Serial.println(F("RepeatPlaybackFolder(EngineHighFolder)"));
   RepeatPlaybackFolder(EngineHighFolder);
-  StartQuickRedBlink();
   engineIsRunningHigh = true;
 }
 

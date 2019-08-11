@@ -13,20 +13,33 @@ void HandleVolumeButtons() {
     }
 }
 
+//void HandleOnOffButton() {
+//  if (powerButton.wasPressed()) {
+//    Serial.println(F("Power button pressed"));
+//    if (engineIsRunning) {
+//      StopEngine();    
+//    } 
+//    else {
+//      StartEngine();
+//    }
+//  }
+//}
+
 void HandleOnOffButton() {
-  if (powerButton.isPressed()) {
+  if (powerButton.wasPressed()) {
     Serial.println(F("Power button pressed"));
-    if (engineIsRunning) {
-      StopEngine();    
+    if (engineIsRunningHigh) {
+      EngineDown();    
     } 
     else {
-      StartEngine();
+      EngineUp();
     }
   }
 }
 
+
 void HandleLightsButton() {
-  if (lightsButton.isPressed()) {
+  if (lightsButton.wasPressed()) {
     Serial.println(F("Lights button pressed"));
     if (lightsAreOn) {
       SetWorkLightsOff();    
