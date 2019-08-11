@@ -16,18 +16,15 @@ int button_pressed_value[RC_CHANNEL_COUNT]; //keep track of the button value
 int channelPins[RC_CHANNEL_COUNT] = {2,3,18,19,20,12};
 String channelNames[RC_CHANNEL_COUNT] = {"CRUSHER", "TRACK RAIL", "TRACK OTHER", "HOPPER", "BELT", "ON/OFF"};
 
-int crusherPulse = 0;
-
+//RC RECEIVER INPUT HANDLING
 int onOffCommand = 0;
-int onOffPulse = 0;
 unsigned long onOffButtonDown = 0;
-
+int crusherPulse = 0;
+int onOffPulse = 0;
 int hopperPulse = 0;
 int beltPulse = 0;
 
 bool crusherIsMoving = false;
-
-
 
 // AUDIO
 bool engineIsRunningHigh = false;

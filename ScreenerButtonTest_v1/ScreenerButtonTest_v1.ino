@@ -31,15 +31,7 @@ void loop() {
     Serial.println(F("Startup loop completed"));
     startup = false;
     PlayInitializedBeep();
-    delay(1000);
-  //  StartEngine();
-//    delay(10000);
-//    EngineUp();
-//    delay(10000);
-//    EngineDown();
-//    delay(10000);
-//    StopEngine();
-  }
+   }
 
   volumeUpButton.read();
   volumeDownButton.read();
