@@ -16,12 +16,11 @@ int button_pressed_value[RC_CHANNEL_COUNT]; //keep track of the button value
 int channelPins[RC_CHANNEL_COUNT] = {2,3,18,19,20,12};
 String channelNames[RC_CHANNEL_COUNT] = {"CRUSHER", "TRACK RAIL", "TRACK OTHER", "HOPPER", "BELT", "ON/OFF"};
 
-int crusherPulse = 0;
-
+//RC RECEIVER INPUT HANDLING
 int onOffCommand = 0;
-int onOffPulse = 0;
 unsigned long onOffButtonDown = 0;
-
+int crusherPulse = 0;
+int onOffPulse = 0;
 int hopperPulse = 0;
 int beltPulse = 0;
 
@@ -32,15 +31,17 @@ ESC HopperESC (HOPPER_ESC_PIN, HOPPER_ESC_MIN, HOPPER_ESC_MAX, HOPPER_ESC_ARM);
 ESC BeltESC (BELT_ESC_PIN, BELT_ESC_MIN, BELT_ESC_MAX, BELT_ESC_ARM);
 ESC CrusherESC (CRUSHER_ESC_PIN, CRUSHER_ESC_MIN, CRUSHER_ESC_MAX, CRUSHER_ESC_ARM);
 
-
 // AUDIO
 bool engineIsRunningHigh = false;
 bool engineIsRunning = false;
 bool playerBusy = false;
 byte volumeLevel;
 
-//LIGHTS
+//TIMER
 OSL_SimpleTimer timer;  
+
+//LIGHTS
+bool lightsAreOn = false;
 unsigned int redBlinkTimerID;
 unsigned int greenBlinkTimerID;
 
@@ -56,6 +57,4 @@ Button trackLeftForwardButton(TRACK_LEFT_FORWARD_PIN, 25, false, false);
 Button trackLeftBackwardButton(TRACK_LEFT_BACKWARD_PIN, 25, false, false);
 Button trackRightForwardButton(TRACK_RIGHT_FORWARD_PIN, 25, false, false);
 Button trackRightBackwardButton(TRACK_RIGHT_BACKWARD_PIN, 25, false, false);
-
-
 

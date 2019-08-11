@@ -25,3 +25,15 @@ void HandleOnOffButton() {
   }
 }
 
+void HandleLightsButton() {
+  if (lightsButton.isPressed()) {
+    Serial.println(F("Lights button pressed"));
+    if (lightsAreOn) {
+      SetWorkLightsOff();    
+    } 
+    else {
+      SetWorkLightsOn();
+    }
+  }
+}
+
