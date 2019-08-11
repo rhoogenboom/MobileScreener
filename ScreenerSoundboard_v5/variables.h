@@ -47,14 +47,15 @@ unsigned int greenBlinkTimerID;
 bool greenLEDState = LOW;
 bool redLEDState = LOW;
 
-//EXTERNAL BUTTONS
-OSL_Button VolumeUpButton = OSL_Button(VOLUME_UP_BUTTON_PIN, true, true, 100);
-OSL_Button VolumeDownButton = OSL_Button(VOLUME_UP_BUTTON_PIN, true, true, 100);
-OSL_Button PowerButton = OSL_Button(POWER_BUTTON_PIN, true, true, 100);
-OSL_Button LightsButton = OSL_Button(LIGHTS_BUTTON_PIN, true, true, 100);
-OSL_Button TrackLeftForwardButton = OSL_Button(TRACK_LEFT_FORWARD_PIN, true, true, 100);
-OSL_Button TrackLeftReverseButton = OSL_Button(TRACK_LEFT_REVERSE_PIN, true, true, 100);
-OSL_Button TrackRightForwardButton = OSL_Button(TRACK_RIGHT_FORWARD_PIN, true, true, 100);
-OSL_Button TrackRightReverseButton = OSL_Button(TRACK_RIGHT_REVERSE_PIN, true, true, 100);
+//BUTTONS
+Button volumeUpButton(VOLUME_UP_PIN, 25, false, false);
+Button volumeDownButton(VOLUME_DOWN_PIN, 25, false, false);
+Button powerButton(POWER_ON_OFF_PIN, 25, false, false);
+Button lightsButton(LIGHTS_ON_OFF_PIN, 25, false, false);
+Button trackLeftForwardButton(TRACK_LEFT_FORWARD_PIN, 25, false, false);
+Button trackLeftBackwardButton(TRACK_LEFT_BACKWARD_PIN, 25, false, false);
+Button trackRightForwardButton(TRACK_RIGHT_FORWARD_PIN, 25, false, false);
+Button trackRightBackwardButton(TRACK_RIGHT_BACKWARD_PIN, 25, false, false);
+
 
 

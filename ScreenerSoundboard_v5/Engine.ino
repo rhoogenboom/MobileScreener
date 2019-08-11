@@ -12,17 +12,20 @@
 
 void StartPlayingWarningBeep() {
   if (!crusherIsMoving) {
+    Serial.println(F("StartPlayingIntercut(WarningBeepTrackNumber)"));
     StartPlayingIntercut(WarningBeepTrackNumber);
   }
 }
 
 void StopPlayingWarningBeep() {
   if (crusherIsMoving) {
+    Serial.println(F("StopPlayingIntercut()"));
     StopPlayingIntercut();
   }
 }
 
 void PlayInitializedBeep() {
+  Serial.println(F("PlayFolderTrack(InitializedBeep, EngineVersion)"));
   PlayFolderTrack(InitializedBeep, EngineVersion);
 }
 
@@ -32,6 +35,7 @@ void StartEngine() {
     engineIsRunning = true;
 
     //Play startup
+    Serial.println(F("PlayFolderTrack(EngineStartFolder, EngineVersion)"));
     PlayFolderTrack(EngineStartFolder, EngineVersion);
     //always wait 1 sec to allow the player to start playing
 
@@ -39,17 +43,20 @@ void StartEngine() {
     wait(1);//wait(500);
 
     //Start loop engine low
+    Serial.println(F("RepeatPlaybackFolder(EngineLowFolder)"));
     RepeatPlaybackFolder(EngineLowFolder);
   }
 }
 
 void EngineUp() {
   //Play rev up
+  Serial.println(F("PlayFolderTrack(EngineUpFolder, EngineVersion)"));
   PlayFolderTrack(EngineUpFolder, EngineVersion);
   //Wait till ready / delay Xms
   wait(1);//wait(1500);
 
   //Start loop engine high
+  Serial.println(F("RepeatPlaybackFolder(EngineHighFolder)"));
   RepeatPlaybackFolder(EngineHighFolder);
   StartQuickRedBlink();
   engineIsRunningHigh = true;
@@ -57,12 +64,14 @@ void EngineUp() {
 
 void EngineDown() {
   //Play rev down
+  Serial.println(F("PlayFolderTrack(EngineDownFolder, EngineVersion)"));
   PlayFolderTrack(EngineDownFolder, EngineVersion);
 
   //Wait till ready / delay Xms
   wait(1);//wait(2500);
 
   //Start loop engine low
+  Serial.println(F("RepeatPlaybackFolder(EngineLowFolder)"));
   RepeatPlaybackFolder(EngineLowFolder);
   StopQuickRedBlink();
   engineIsRunningHigh = false;
@@ -75,6 +84,7 @@ void StopEngine() {
       EngineDown();
     }
     //Play engine stop
+    Serial.println(F("PlayFolderTrack(EngineStopFolder, EngineVersion)"));
     PlayFolderTrack(EngineStopFolder, EngineVersion);
     wait(1);//wait(1500);
     engineIsRunning = false;

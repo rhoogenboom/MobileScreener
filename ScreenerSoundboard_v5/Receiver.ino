@@ -1,4 +1,9 @@
 void HandleReceiverInput() {
+  //buttons
+  HandleVolumeButtons();
+  HandleOnOffButton();
+
+  //receiver input
   HandleOnOffChannel();
   HandleDriving();
   HandleBelt();
@@ -61,6 +66,8 @@ void getOnOffChannelPulse() {
 
 void HandleOnOffChannel() {
   onOffPulse = channel_pulse_time[ON_OFF_CHANNEL_NR];
+
+
 
   if (onOffPulse == 0) {
     //no receiver input or lost receiver input, maintain current values

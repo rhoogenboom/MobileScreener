@@ -1,5 +1,5 @@
 #include <OSL_SimpleTimer.h>
-#include <OSL_Button.h>
+#include <JC_Button.h>
 #include <ESC.h>
 #include "defines.h"
 #include "variables.h"
@@ -29,8 +29,6 @@ void setup() {
   Serial.println(F("Setting up"));
 
   //initialize audio player on serial comms
-  //SerialMP3Player.begin(9600);
-  //Replaced by Serial2
   Serial2.begin(9600);
 
   //initiale RC channel values to 0
@@ -64,20 +62,21 @@ void setup() {
   //Read previous volume from EEPROM
   long Temp;
   // Get EEPROM Initialization value
-  Serial.println("eeprom initial read");
-  eeprom_read(Temp, E_InitNum);
-
-  // If EEPROM has never been initialized before, do so now
-  if (Temp == EEPROM_Init)
-  {
-    Serial.println("eeprom not initialized");
-    Initialize_EEPROM();
-  }
-  else
-  {
-    Serial.println("load eeprom");
-    Load_EEPROM();         
-  }
+  volumeLevel = 20;
+//  Serial.println("eeprom initial read");
+//  eeprom_read(Temp, E_InitNum);
+//
+//  // If EEPROM has never been initialized before, do so now
+//  if (Temp == EEPROM_Init)
+//  {
+//    Serial.println("eeprom not initialized");
+//    Initialize_EEPROM();
+//  }
+//  else
+//  {
+//    Serial.println("load eeprom");
+//    Load_EEPROM();         
+//  }
 
   delay(2500);
   
@@ -110,6 +109,14 @@ void loop() {
     startup = false;
     PlayInitializedBeep();
   }
+  volumeUpButton.read();
+  volumeDownButton.read();
+  powerButton.read();
+  lightsButton.read();
+  trackLeftForwardButton.read();
+  trackLeftBackwardButton.read();
+  trackLeftForwardButton.read();
+  trackRightBackwardButton.read();
 
   timer.run();
   

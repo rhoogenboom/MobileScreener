@@ -8,7 +8,7 @@
 #define MIN(x,y) ( x > y ? y : x )
 #define MAX(x,y) ( x > y ? x : y )
 
-//PINS
+//CRUSHER PINS
 #define CRUSHER_RC_PIN (2) 
 #define TRACK_LEFT_RC_PIN (3) 
 #define TRACK_RIGHT_RC_PIN (18)  
@@ -21,8 +21,29 @@
 #define BELT_ESC_PIN (6)  
 
 #define PLAYER_BUSY_PIN (21) //notify when player is done playing and available, requires interrupt?? switch with on/off pin?
-#define PLAYER_RX_PIN (17) //connected to TX on player //v4.0 Serial2 17-RX //v3.0 PIN 10 software serial
-#define PLAYER_TX_PIN (16) //connected to RX on player //v4.0 Serial2 16-TX //v3.0 PIN 11
+#define PLAYER_RX_PIN (17) //connected to TX on player - Serial2 17-RX //v3.0 PIN 10
+#define PLAYER_TX_PIN (16) //connected to RX on player - Serial2 16-TX //v3.0 PIN 11
+
+//BUTTON PINS
+#define VOLUME_UP_PIN (32)
+#define VOLUME_DOWN_PIN (33)
+#define POWER_ON_OFF_PIN (34)
+#define LIGHTS_ON_OFF_PIN (35)
+#define TRACK_LEFT_FORWARD_PIN (36)
+#define TRACK_LEFT_BACKWARD_PIN (37)
+#define TRACK_RIGHT_FORWARD_PIN (38)
+#define TRACK_RIGHT_BACKWARD_PIN (39)
+
+//LIGHT PINS
+#define WORKINGLIGHTS 40
+#define GREEN_PIN 41
+#define RED_PIN 42
+
+//LIGHTS
+#define quickBlinkInterval 1000
+#define slowBlinkInterval 750
+#define fastBlinkInterval 100
+#define quickBlinkSequence 5500
 
 //ARRAY NUMERING
 #define CRUSHER_CHANNEL_NR (0) 
@@ -86,24 +107,7 @@
 #define BAD_MAX_PULSE (2500)
 #define ON_OFF_MIDDLE (1500)
 
-#define quickBlinkSequence 5500
-
-//LIGHTS
-#define quickBlinkInterval 1000
-#define slowBlinkInterval 750
-#define fastBlinkInterval 100
-
-#define WORKINGLIGHTS 40
-#define GREEN_PIN 41
-#define RED_PIN 42
-
-//EXTERNAL BUTTONS
-#define VOLUME_UP_BUTTON_PIN 32
-#define VOLUME_DOWN_BUTTON_PIN 33
-#define POWER_BUTTON_PIN 34
-#define LIGHTS_BUTTON_PIN 35
-#define TRACK_LEFT_FORWARD_PIN 36
-#define TRACK_LEFT_REVERSE_PIN 37
-#define TRACK_RIGHT_FORWARD_PIN 38
-#define TRACK_RIGHT_REVERSE_PIN 39
+// AUDIO
+#define AUDIO_MIN_VOLUME (0)
+#define AUDIO_MAX_VOLUME (30)
 
