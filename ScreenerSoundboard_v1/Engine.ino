@@ -44,6 +44,7 @@ void StartEngine() {
 }
 
 void EngineUp() {
+  StartQuickRedBlink();  
   //Play rev up
   PlayFolderTrack(EngineUpFolder, EngineVersion);
   //Wait till ready / delay Xms
@@ -51,11 +52,12 @@ void EngineUp() {
 
   //Start loop engine high
   RepeatPlaybackFolder(EngineHighFolder);
-  StartQuickRedBlink();
+  StopSlowGreenBlink();
   engineIsRunningHigh = true;
 }
 
 void EngineDown() {
+  StartSlowGreenBlink();  
   //Play rev down
   PlayFolderTrack(EngineDownFolder, EngineVersion);
 
