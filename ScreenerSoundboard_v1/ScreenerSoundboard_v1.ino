@@ -81,7 +81,7 @@ void setup() {
   onOffCommand = POWER_IS_OFF;
 
   delay(2500);
-  
+
   Serial.println(F("Setup done"));
 }
 
@@ -89,14 +89,12 @@ void loop() {
   if (startup) {
     delay(3000);
     setVolume(volumeLevel);
-   
     Serial.println(F("Startup loop entering"));
     BeltESC.speed(BELT_ESC_STOP);
     HopperESC.speed(HOPPER_ESC_STOP);
     CrusherESC.speed(CRUSHER_ESC_STOP);
 
     SetWorkLightsOn();    
-    StartSlowGreenBlink();
   
     Serial.println(F("Startup loop completed"));
     startup = false;
