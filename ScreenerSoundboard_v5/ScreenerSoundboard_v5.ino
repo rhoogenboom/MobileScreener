@@ -59,24 +59,25 @@ void setup() {
 
   attachInterrupt(digitalPinToInterrupt(PLAYER_BUSY_PIN), SetPlayerFree, RISING);
 
+  volumeLevel = 20;
+
   //Read previous volume from EEPROM
   long Temp;
   // Get EEPROM Initialization value
-  volumeLevel = 20;
-//  Serial.println("eeprom initial read");
-//  eeprom_read(Temp, E_InitNum);
-//
-//  // If EEPROM has never been initialized before, do so now
-//  if (Temp == EEPROM_Init)
-//  {
-//    Serial.println("eeprom not initialized");
-//    Initialize_EEPROM();
-//  }
-//  else
-//  {
-//    Serial.println("load eeprom");
-//    Load_EEPROM();         
-//  }
+  Serial.println("eeprom initial read");
+  eeprom_read(Temp, E_InitNum);
+
+  // If EEPROM has never been initialized before, do so now
+  if (Temp == EEPROM_Init)
+  {
+    Serial.println("eeprom not initialized");
+    Initialize_EEPROM();
+  }
+  else
+  {
+    Serial.println("load eeprom");
+    Load_EEPROM();         
+  }
 
   delay(2500);
   
@@ -105,7 +106,6 @@ void loop() {
     Serial.println(F("Startup loop completed"));
     startup = false;
     PlayInitializedBeep();
-    StartSlowGreenBlink();
     delay(2500);
     StartEngine();
   }
@@ -115,7 +115,7 @@ void loop() {
   lightsButton.read();
   trackLeftForwardButton.read();
   trackLeftBackwardButton.read();
-  trackLeftForwardButton.read();
+  trackRightForwardButton.read();
   trackRightBackwardButton.read();
 
   timer.run();

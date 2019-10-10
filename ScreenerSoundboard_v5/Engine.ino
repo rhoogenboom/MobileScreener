@@ -31,9 +31,11 @@ void PlayInitializedBeep() {
 
 void StartEngine() {
   if (!engineIsRunning) {
+    CreateQBTimer();
     engineIsRunningHigh = false;
     engineIsRunning = true;
 
+    StartSlowGreenBlink();
     //Play startup
     Serial.println(F("PlayFolderTrack(EngineStartFolder, EngineVersion)"));
     PlayFolderTrack(EngineStartFolder, EngineVersion);
@@ -49,6 +51,7 @@ void StartEngine() {
 }
 
 void EngineUp() {
+  StopSlowGreenBlink();
   StartQuickRedBlink();
   //Play rev up
   Serial.println(F("PlayFolderTrack(EngineUpFolder, EngineVersion)"));
@@ -75,6 +78,7 @@ void EngineDown() {
   RepeatPlaybackFolder(EngineLowFolder);
   StopQuickRedBlink();
   engineIsRunningHigh = false;
+  StartSlowGreenBlink();
 }
 
 void StopEngine() {
@@ -88,6 +92,7 @@ void StopEngine() {
     PlayFolderTrack(EngineStopFolder, EngineVersion);
     wait(1);//wait(1500);
     engineIsRunning = false;
+    StopSlowGreenBlink();
   }
 }
 

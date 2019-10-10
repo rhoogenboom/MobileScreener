@@ -80,6 +80,9 @@ String ParseEngineState(bool state, bool revHigh) {
   return result;
 }
 
+String PrintLightState() {
+  Serial.println(F("Lights are on: ")); PrintTrueFalse(lightsAreOn);
+}
 
 String PrintEngineState() {
   Serial.println(F("------------ENGINE"));

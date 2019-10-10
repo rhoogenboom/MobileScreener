@@ -3,6 +3,7 @@ void HandleReceiverInput() {
   HandleVolumeButtons();
   HandleOnOffButton();
   HandleLightsButton();
+  HandleMovingButtons();
 
   //receiver input
   HandleOnOffChannel();
@@ -114,11 +115,11 @@ void HandleDriving() {
     if ( ChannelIsOffCenter(drivingPulseLeft) ||
          ChannelIsOffCenter(drivingPulseRight) ) {
       //we have signal on the tracks so crusher is moving
-      StartPlayingWarningBeep();
       crusherIsMoving = true;
+      StartPlayingWarningBeep();
     }
     else {
-      //TODO: stop playing crusher moving warning signal if we are playing something
+      //stop playing crusher moving warning signal if we are playing something
       StopPlayingIntercut();
       crusherIsMoving = false;
     }
