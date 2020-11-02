@@ -1,9 +1,9 @@
 #include <JC_Button.h>
 
 const byte 
-  up(32),
-  down(33),
-  toggle(34);     // the number of the pushbutton pi
+  up(6),
+  down(7),
+  toggle(A1);     // the number of the pushbutton pin
 
 Button btnUP(up, false, false, 25), btnDN(down, false, true, 25);
 ToggleButton btnToggle(toggle);
@@ -61,19 +61,19 @@ void loop() {
 //            break;
 //    }
 
-    if (btnUP.isPressed()) {
-        ++count;                            // increment the counter
-        count = min(count, MAX_COUNT);      // but not more than the specified maximum
-    }
-    if (btnDN.isPressed()) {
-            --count;                            // increment the counter
-            count = max(count, MIN_COUNT);      // but not more than the specified maximum
-    }
-    
-    if (count != lastCount)         // print the count if it has changed
-    {
-        lastCount = count;
-        Serial.println(count, DEC);
-    }
+//    if (btnUP.isPressed()) {
+//        ++count;                            // increment the counter
+//        count = min(count, MAX_COUNT);      // but not more than the specified maximum
+//    }
+//    if (btnDN.isPressed()) {
+//            --count;                            // increment the counter
+//            count = max(count, MIN_COUNT);      // but not more than the specified maximum
+//    }
+//    
+//    if (count != lastCount)         // print the count if it has changed
+//    {
+//        lastCount = count;
+//        Serial.println(count, DEC);
+//    }
 
 }
