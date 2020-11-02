@@ -83,7 +83,8 @@ void ExecuteCommand(byte CMD, byte Par1, byte Par2, bool wait)
   for (byte k=0; k<10; k++)
   {
 //    SerialMP3Player.write( Command_line[k]);
-    Serial2.write(Command_line[k]);
+//    Serial2.write(Command_line[k]);
+    Serial.write(Command_line[k]);
   }
   //wait when we want to
   if (wait) {

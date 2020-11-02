@@ -35,7 +35,7 @@ void setup() {
   //initialize audio player on serial comms
   //SerialMP3Player.begin(9600);
   //Replaced by Serial2
-  Serial2.begin(9600);
+  //Serial1.begin(9600);
 
   //initiale RC channel values to 0
   for (int i=0; i<RC_CHANNEL_COUNT; i++ ) {
