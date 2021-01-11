@@ -7,6 +7,10 @@
 // Useful functions
 #define MIN(x,y) ( x > y ? y : x )
 #define MAX(x,y) ( x > y ? x : y )
+#define ADDPERCENTAGE(x, y) ( (x/100.0)*(100.0+y) )
+
+// Center belt additional percentage
+#define CENTER_BELT_PERC (15)
 
 //PINS
 #define CRUSHER_RC_PIN (2) 

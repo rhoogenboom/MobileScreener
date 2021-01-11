@@ -75,10 +75,14 @@ void setup() {
     Load_EEPROM();         
   }
 
+  volumeLevel = 5;
+  Write_EEPROM();
+
   delay(2500);
   
   //connect ESCs
   BeltESC.arm();
+  BeltCenterESC.arm();
   HopperESC.arm();
   CrusherESC.arm();
 
@@ -95,6 +99,7 @@ void loop() {
     setVolume(volumeLevel);
     Serial.println(F("Startup loop entering"));
     BeltESC.speed(BELT_ESC_STOP);
+    BeltCenterESC.speed(BELT_ESC_STOP);
     HopperESC.speed(HOPPER_ESC_STOP);
     CrusherESC.speed(CRUSHER_ESC_STOP);
 

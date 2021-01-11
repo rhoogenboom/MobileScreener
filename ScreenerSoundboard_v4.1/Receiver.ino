@@ -124,8 +124,13 @@ void HandleBelt() {
     //no receiver input or lost receiver input, maintain current values
   }
   else {
-
     BeltESC.speed(beltPulse);
+    if (beltPulse >= BELT_ESC_ARM+100) {
+      BeltCenterESC.speed(ADDPERCENTAGE(beltPulse, CENTER_BELT_PERC));
+    } 
+    else {
+      BeltCenterESC.speed(BELT_ESC_ARM);
+    }
   }
 }
 
