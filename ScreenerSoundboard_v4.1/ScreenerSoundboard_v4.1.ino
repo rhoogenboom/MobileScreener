@@ -75,7 +75,7 @@ void setup() {
     Load_EEPROM();         
   }
 
-  volumeLevel = 5;
+  volumeLevel = 30;
   Write_EEPROM();
 
   delay(2500);

@@ -125,11 +125,11 @@ void HandleBelt() {
   }
   else {
     BeltESC.speed(beltPulse);
-    if (beltPulse >= BELT_ESC_ARM+100) {
-      BeltCenterESC.speed(ADDPERCENTAGE(beltPulse, CENTER_BELT_PERC));
+    if (beltPulse >= BELT_ESC_STOP) {
+      BeltCenterESC.speed(MIN(ADDPERCENTAGE(beltPulse, CENTER_BELT_PERC), BELT_ESC_MAX));
     } 
     else {
-      BeltCenterESC.speed(BELT_ESC_ARM);
+      BeltCenterESC.speed(BELT_ESC_STOP);
     }
   }
 }

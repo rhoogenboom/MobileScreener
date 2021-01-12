@@ -15,6 +15,14 @@ void PrintESCValue(int channel) {
   Serial.println(channel_pulse_time[channel]);
 }
 
+
+void PrintBeltESC2() {
+  Serial.print("BELT 2 ");
+  Serial.print(F(" "));
+  Serial.println(ADDPERCENTAGE(channel_pulse_time[4], CENTER_BELT_PERC));
+}
+
+
 void PrintESCValues() {
   Serial.println(F("------------"));
   for (int i=1; i<=RC_CHANNEL_COUNT; i++) {
@@ -97,6 +105,7 @@ void PrintDebugOutput() {
 //  PrintReceiverInputValues();
 //  PrintChannel(ON_OFF_CHANNEL_NR);
   PrintESCValues();
+  PrintBeltESC2();
   PrintStates();
 //  PrintPulses();
 //  PrintEngineState();
