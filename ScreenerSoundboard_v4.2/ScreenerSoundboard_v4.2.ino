@@ -9,6 +9,9 @@
 //
 // PCB revision history:
 //
+// version 4.2
+// - new light combination of slow green when on, red when running, blicking both at high speed
+//
 // version 4.0
 // - onboard volume buttons
 // - software serial pins for MP3 player, requires rewiring to serial2 ports
@@ -96,6 +99,7 @@ void loop() {
 
     SetWorkLightsOn(); 
     StartSlowGreenBlink();
+    //StartQuickRedBlink();
   
     Serial.println(F("Startup loop completed"));
     startup = false;
@@ -106,5 +110,4 @@ void loop() {
   
   HandleReceiverInput();
   //PrintDebugOutput();
-  //delay(2000);
 }

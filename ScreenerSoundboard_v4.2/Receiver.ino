@@ -12,13 +12,15 @@ void HandleEngine() {
   switch (onOffCommand) {
     case POWER_SWITCH_ON:
       SetWorkLightsOn();
+      StopSlowGreenBlink();
       CreateQBTimer();
-      StartSlowRedBlink();
       StartEngine();
+      StartQuickRedBlink();
       onOffCommand = POWER_IS_ON;
       break;
     case POWER_SWITCH_OFF:
       StopEngine();
+      StopQuickRedBlink();
       StartSlowGreenBlink();
       SetWorkLightsOff();
       onOffCommand = POWER_IS_OFF;
